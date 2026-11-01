@@ -20,7 +20,7 @@ export default function AdminLayout({ children, title }) {
       <header className="bg-navy text-cream">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-3 gap-y-2 px-4 py-3">
           <Link to="/admin" className="mr-2 font-head text-2xl font-bold">
-            MiForge <span className="text-base font-normal">Operator</span>
+            MiForge FS <span className="text-base font-normal">Operator</span>
           </Link>
           <nav className="flex flex-wrap gap-1 text-[16px]" aria-label="Admin">
             <NavLink to="/admin" end className={linkCls}>Dashboard</NavLink>

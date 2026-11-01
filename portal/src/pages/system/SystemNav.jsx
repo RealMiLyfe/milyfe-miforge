@@ -14,7 +14,7 @@ export default function SystemNav({ title, children }) {
   return (
     <main className="min-h-screen bg-cream px-4 pb-10 pt-6 text-[16px]">
       <header className="mx-auto max-w-6xl">
-        <Link to="/" className="font-head text-2xl font-bold text-navy">MiForge</Link>
+        <Link to="/" className="font-head text-2xl font-bold text-navy">MiForge FS</Link>
         <span className="ml-2 text-charcoal/60">/ system overview</span>
         <nav className="mt-3 flex flex-wrap gap-2" aria-label="System sections">
           {LINKS.map(([to, label]) => (

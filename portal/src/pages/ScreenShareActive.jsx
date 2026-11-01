@@ -25,7 +25,7 @@ export default function ScreenShareActive() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-8 bg-[#8f2f2f] px-6 text-center text-cream">
+    <main className="flex min-h-screen flex-col items-center justify-center gap-8 bg-[#B34040] px-6 text-center text-cream">
       <p className="text-[28px] font-semibold" aria-live="polite">
         Sharing for {fmt(seconds)}
       </p>

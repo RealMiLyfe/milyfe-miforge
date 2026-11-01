@@ -22,7 +22,7 @@ export default function AdminLogin() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-navy px-6 text-cream">
-      <p className="font-head text-5xl font-bold">MiForge Operator</p>
+      <p className="font-head text-5xl font-bold">MiForge FS Operator</p>
       <p className="text-xl text-cream/80">Back office. Operator only.</p>
 
       <form onSubmit={submit} className="w-full max-w-sm">
@@ -41,7 +41,7 @@ export default function AdminLogin() {
         <button type="submit" className="btn-rust mt-4 w-full">Log In</button>
       </form>
 
-      <p className="text-sm text-cream/60">local dev password: miforge-admin</p>
+      <p className="text-sm text-cream/60">miforgefs.milyfe.fun · local dev password: miforge-admin</p>
       <p className="text-sm">
         <Link to="/" className="text-cream/80 underline">← back to client portal</Link>
         {' · '}

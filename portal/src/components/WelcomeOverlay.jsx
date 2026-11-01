@@ -18,9 +18,9 @@ export default function WelcomeOverlay() {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-charcoal/50 p-6" role="dialog" aria-modal="true" aria-labelledby="welcome-h">
       <div className="card w-full max-w-lg p-8">
-        <h1 id="welcome-h" className="text-4xl">Welcome to MiForge, {client.full_name}!</h1>
+        <h1 id="welcome-h" className="text-4xl">Welcome to MiForge Founder Services, {client.full_name}!</h1>
         <p className="mt-4 text-2xl">This is your home screen. Tap any button to get started.</p>
-        <p className="mt-4 text-2xl">The orange button calls John. The blue button books a visit.</p>
+        <p className="mt-4 text-2xl">The teal button calls John. The blue button books a visit.</p>
         <p className="mt-4 text-2xl">
           Got questions?{' '}
           <a href={mock.meta.operator.tel} className="font-semibold text-navy underline">

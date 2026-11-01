@@ -30,7 +30,7 @@ export default function FamilyLogin() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-cream px-6 text-center">
-      <p className="font-head text-5xl font-bold text-navy">MiForge Family Access</p>
+      <p className="font-head text-4xl font-bold text-navy">MiForge FS Family Access</p>
 
       <form onSubmit={submit} className="w-full max-w-md">
         <label htmlFor="femail" className="mb-2 block text-left text-2xl font-semibold text-navy">

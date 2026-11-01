@@ -29,7 +29,7 @@ export default function FamilyHome() {
   return (
     <main className="min-h-screen bg-cream px-6 pb-10 text-[18px]">
       <header className="border-b border-navy/20 py-4 text-center">
-        <p className="font-head text-4xl font-bold text-navy">MiForge Family Access</p>
+        <p className="font-head text-4xl font-bold text-navy">MiForge FS Family Access</p>
       </header>
 
       <div className="mx-auto mt-6 w-full max-w-2xl">

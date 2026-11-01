@@ -15,7 +15,8 @@ export default function Login() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-cream px-6">
-      <p className="font-head text-5xl font-bold text-navy">MiForge</p>
+      <img src="/logo.png" alt="MiLyfe" className="h-14 w-auto" />
+      <p className="font-head text-4xl font-bold text-navy">MiForge Founder Services</p>
 
       <form onSubmit={sendLink} className="w-full max-w-md">
         <label htmlFor="email" className="mb-2 block text-2xl font-semibold text-navy">
@@ -37,7 +38,7 @@ export default function Login() {
       <p className="text-center text-[24px] font-semibold text-navy">
         Can't log in?{' '}
         <a href={op.tel} className="underline">
-          Call MiForge: {op.phone}
+          Call John: {op.phone}
         </a>
       </p>
       <p className="measure text-center text-lg text-charcoal/80">

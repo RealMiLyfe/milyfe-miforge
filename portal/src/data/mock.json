@@ -6,7 +6,8 @@
     "operator": {
       "name": "John",
       "phone": "904-562-0544",
-      "tel": "tel:9045620544"
+      "tel": "tel:9045620544",
+      "email": "john@miforgefs.milyfe.fun"
     }
   },
   "clients": [
@@ -319,7 +320,7 @@
       "id": 2,
       "client_id": 1,
       "consent_type": "Written",
-      "scope": "Store visit notes and invoice records in MiForge systems",
+      "scope": "Store visit notes and invoice records in MiForge Founder Services systems",
       "granted": true,
       "granted_date": "2025-10-14",
       "revoked_date": null,
@@ -463,22 +464,22 @@
         {
           "label": "Cash",
           "pct": 60,
-          "color": "#7A8B5C"
+          "color": "#00C1AE"
         },
         {
           "label": "CashApp",
           "pct": 20,
-          "color": "#1B3A5C"
+          "color": "#1E3A6E"
         },
         {
           "label": "Venmo",
           "pct": 10,
-          "color": "#6B8CA6"
+          "color": "#5B87BF"
         },
         {
           "label": "Check",
           "pct": 10,
-          "color": "#D4A24C"
+          "color": "#FFC107"
         }
       ]
     },
@@ -555,15 +556,20 @@
       }
     ],
     "brand": {
-      "name": "MiForge by MiLyfe",
+      "name": "MiForge Founder Services",
       "phone": "904-562-0544",
-      "domain": "milyfe.fun (production)",
+      "domain": "miforgefs.milyfe.fun",
       "colors": {
-        "navy": "#1B3A5C",
-        "cream": "#F5F0E8",
-        "rust": "#C65D3B",
-        "charcoal": "#2A2A2A"
-      }
+        "navy_harbor800": "#1E3A6E",
+        "cream_bg": "#F5F0E8",
+        "teal900_accent": "#006558",
+        "teal500": "#00C1AE",
+        "mly500_gold": "#FFC107",
+        "charcoal": "#2A2A2A",
+        "source": "RealMiLyfe/MiLyfe-Platform-OS tailwind.config.ts + globals.css (harbor/teal/mly)"
+      },
+      "short_name": "MiForge FS",
+      "parent": "MiLyfe economy (milyfe.fun) - MiForge OS itself is the separate white-labelable platform"
     },
     "jewels": [
       {
@@ -648,19 +654,19 @@
           "label": "caddy",
           "gb": 0.25,
           "week": 1,
-          "color": "#1B3A5C"
+          "color": "#1E3A6E"
         },
         {
           "label": "postgres",
           "gb": 2,
           "week": 1,
-          "color": "#6B8CA6"
+          "color": "#5B87BF"
         },
         {
           "label": "mariadb",
           "gb": 1,
           "week": 1,
-          "color": "#6B8CA6"
+          "color": "#5B87BF"
         },
         {
           "label": "redis",
@@ -672,19 +678,19 @@
           "label": "nocodb",
           "gb": 1,
           "week": 1,
-          "color": "#C65D3B"
+          "color": "#006558"
         },
         {
           "label": "nextcloud",
           "gb": 1,
           "week": 1,
-          "color": "#6B8CA6"
+          "color": "#5B87BF"
         },
         {
           "label": "vaultwarden",
           "gb": 0.25,
           "week": 1,
-          "color": "#8B7AA6"
+          "color": "#3664A2"
         },
         {
           "label": "invoice ninja",
@@ -696,7 +702,7 @@
           "label": "uptime kuma",
           "gb": 0.5,
           "week": 1,
-          "color": "#D4A24C"
+          "color": "#FFC107"
         },
         {
           "label": "ntfy",
@@ -708,13 +714,13 @@
           "label": "n8n",
           "gb": 1,
           "week": 2,
-          "color": "#C65D3B"
+          "color": "#006558"
         },
         {
           "label": "chatwoot",
           "gb": 1.5,
           "week": 2,
-          "color": "#8B7AA6"
+          "color": "#3664A2"
         },
         {
           "label": "formbricks",
@@ -878,7 +884,7 @@
         "done": true
       },
       {
-        "label": "Production DNS for milyfe.fun via Cloudflare",
+        "label": "Production DNS for miforgefs.milyfe.fun via Cloudflare",
         "done": false
       },
       {

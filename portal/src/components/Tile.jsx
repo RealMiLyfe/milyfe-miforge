@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const TILE_STYLES = {
   rust: 'bg-rust text-cream',
   navy: 'bg-navy text-cream',
-  olive: 'bg-olive text-cream',
+  olive: 'bg-olive text-charcoal', // teal-500: dark text for AA contrast
   blue: 'bg-blue text-cream',
   gold: 'bg-gold text-charcoal',
   purple: 'bg-purple text-cream',

@@ -17,7 +17,7 @@ export default function Account() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `miforge-${client.full_name.toLowerCase().replace(/[^a-z]+/g, '-')}-data.json`;
+      a.download = `miforgefs-${client.full_name.toLowerCase().replace(/[^a-z]+/g, '-')}-data.json`;
       a.click();
       URL.revokeObjectURL(url);
       setDl('ready');

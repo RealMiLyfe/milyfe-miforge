@@ -11,9 +11,9 @@
   h1, h2, h3, h4 {
     @apply font-head text-navy;
   }
-  /* WCAG 2.1 AA focus ring: 3px rust, 2px offset */
+  /* WCAG 2.1 AA focus ring: 3px teal accent (#006558), 2px offset */
   :focus-visible {
-    outline: 3px solid #C65D3B;
+    outline: 3px solid #006558;
     outline-offset: 2px;
   }
   /* no italics for emphasis - font-weight only */

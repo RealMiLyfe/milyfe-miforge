@@ -9,28 +9,29 @@ const { title } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} · MiForge by MiLyfe</title>
+    <title>{title} · MiForge Founder Services</title>
     <meta
       name="description"
-      content="MiForge by MiLyfe - in-home tech help in Jacksonville, FL. Sessions, projects, and partnerships for seniors, churches, and families."
+      content="MiForge Founder Services (miforgefs.milyfe.fun) - in-home tech help in Jacksonville, FL. Sessions, projects, and partnerships for seniors, churches, and families. Part of the MiLyfe economy."
     />
     <!--
       PRODUCTION: load Lora + Inter here (e.g. Google Fonts <link rel="preload">).
       Local dev intentionally uses system font stacks - no external font CDNs,
       so the site works fully offline.
     -->
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231B3A5C'/%3E%3Ctext x='16' y='22' font-size='18' text-anchor='middle' fill='%23F5F0E8' font-family='Georgia,serif'%3EM%3C/text%3E%3C/svg%3E"
-    />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <!-- No analytics, tracking, or telemetry scripts. None. -->
   </head>
   <body class="bg-cream font-body text-charcoal">
     <!-- Sticky top band, 80px -->
     <header class="sticky top-0 z-50 h-20 border-b border-navy/20 bg-cream">
       <div class="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4">
-        <a href="/" class="font-head text-2xl font-bold text-navy">
-          MiForge <span class="text-lg font-normal">by MiLyfe</span>
+        <a href="/" class="flex items-center gap-3">
+          <img src="/logo.png" alt="MiLyfe" class="h-10 w-auto" />
+          <span class="font-head text-2xl font-bold text-navy">
+            MiForge <span class="hidden text-lg font-normal sm:inline">Founder Services</span>
+          </span>
         </a>
         <a href="tel:9045620544" class="btn-rust text-lg sm:text-xl">
           Call or Text 904-562-0544
@@ -44,7 +45,7 @@ const { title } = Astro.props;
 
     <footer class="mt-16 border-t border-navy/20 py-8">
       <div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 text-lg sm:flex-row sm:items-center sm:justify-between">
-        <p>MiForge is part of MiLyfe. Serving Jacksonville, FL.</p>
+        <p>MiForge Founder Services · miforgefs.milyfe.fun · part of the MiLyfe economy · Jacksonville, FL</p>
         <p class="flex gap-6">
           <a href="/trust" class="font-semibold text-navy underline">Privacy &amp; Trust Agreement</a>
           <a href="tel:9045620544" class="font-semibold text-navy underline">904-562-0544</a>

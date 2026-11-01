@@ -9,7 +9,8 @@ const STATUS_STYLES = {
   Lead: 'bg-warn text-cream',
 };
 
-const AVATAR_COLORS = ['#1B3A5C', '#7A8B5C', '#8B7AA6', '#C65D3B', '#6B8CA6'];
+// MiLyfe brand hues; every one keeps >=4.5:1 contrast with the cream initials.
+const AVATAR_COLORS = ['#1E3A6E', '#006558', '#3664A2', '#B34040', '#5B87BF'];
 
 function initials(name) {
   return name.split(/[^A-Za-z]+/).filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase();

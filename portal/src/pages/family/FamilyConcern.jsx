@@ -14,7 +14,7 @@ export default function FamilyConcern() {
       <a href={op.tel} className="btn-rust w-full max-w-md">📞 {op.phone}</a>
       <p className="text-2xl">
         You can also email{' '}
-        <a href="mailto:john@milyfe.fun" className="font-semibold text-navy underline">john@milyfe.fun</a>
+        <a href="mailto:john@miforgefs.milyfe.fun" className="font-semibold text-navy underline">john@miforgefs.milyfe.fun</a>
       </p>
       <p className="measure text-xl text-charcoal/80">
         We take family concerns seriously. Every concern is logged and addressed within 24 hours.

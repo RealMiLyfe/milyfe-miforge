@@ -164,7 +164,7 @@ export default function AdminClientProfile() {
                 {t.status}
               </span>
               <span className="text-charcoal/80">
-                URL: {t.status === 'Awaiting Operator Access' ? <span className="font-semibold text-warn">Awaiting operator access</span> : 'https://tools.milyfe.fun/' + t.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
+                URL: {t.status === 'Awaiting Operator Access' ? <span className="font-semibold text-warn">Awaiting operator access</span> : 'https://tools.miforgefs.milyfe.fun/' + t.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
               </span>
             </div>
           ))}

@@ -27,13 +27,13 @@ export default function SystemArch() {
       </p>
 
       <div className="overflow-x-auto rounded-card border border-navy/30 bg-cream p-2 shadow-elev1">
-        <svg viewBox="0 0 1000 660" className="min-w-[900px] w-full" role="img" aria-label="MiForge architecture diagram">
+        <svg viewBox="0 0 1000 660" className="min-w-[900px] w-full" role="img" aria-label="MiForge Founder Services architecture diagram">
           <defs>
             <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M 0 0 L 10 5 L 0 10 z" fill="#4A7C59" />
             </marker>
             <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="#6B8CA6" />
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#5B87BF" />
             </marker>
             <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M 0 0 L 10 5 L 0 10 z" fill="#B34040" />
@@ -42,37 +42,37 @@ export default function SystemArch() {
               <path d="M 0 0 L 10 5 L 0 10 z" fill="#8a8a8a" />
             </marker>
             <marker id="arrow-yellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="#D4A24C" />
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#FFC107" />
             </marker>
           </defs>
 
           {/* client devices */}
-          {box(30, 250, 170, 110, '#F5F0E8', '#1B3A5C', 'Client devices', 'operator laptop · phones')}
+          {box(30, 250, 170, 110, '#F5F0E8', '#1E3A6E', 'Client devices', 'operator laptop · phones')}
 
           {/* Cloudflare DNS + Pages */}
-          {box(380, 20, 240, 44, '#F5F0E8', '#D4A24C', 'Cloudflare DNS', 'routing layer')}
-          {box(680, 20, 290, 64, '#F5F0E8', '#D4A24C', 'Cloudflare Pages', 'marketing site/ + portal/')}
+          {box(380, 20, 240, 44, '#F5F0E8', '#FFC107', 'Cloudflare DNS', 'miforgefs.milyfe.fun')}
+          {box(680, 20, 290, 64, '#F5F0E8', '#FFC107', 'Cloudflare Pages', 'marketing site/ + portal/')}
 
           {/* Oracle VM */}
-          <rect x="300" y="110" width="460" height="480" rx="16" fill="#F5F0E8" stroke="#1B3A5C" strokeWidth="2.5" />
-          <text x="530" y="134" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#1B3A5C">Oracle VM — Docker Compose (14 containers)</text>
+          <rect x="300" y="110" width="460" height="480" rx="16" fill="#F5F0E8" stroke="#1E3A6E" strokeWidth="2.5" />
+          <text x="530" y="134" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#1E3A6E">Oracle VM — Docker Compose (14 containers)</text>
 
           {/* Caddy gateway */}
-          {box(340, 148, 380, 36, '#1B3A5C', '#1B3A5C', 'Caddy — gateway (80/443)', '', '', '#F5F0E8')}
+          {box(340, 148, 380, 36, '#1E3A6E', '#1E3A6E', 'Caddy — gateway (80/443)', '', '', '#F5F0E8')}
 
           {/* edge network zone */}
           <rect x="320" y="196" width="420" height="204" rx="12" fill="none" stroke="#4A7C59" strokeWidth="1.5" strokeDasharray="6 4" />
           <text x="330" y="212" fontSize="11" fontWeight="bold" fill="#4A7C59">edge network</text>
           {apps.map((a, i) => {
             const col = i % 3, row = Math.floor(i / 3);
-            return box(330 + col * 140, 224 + row * 42, 130, 32, '#1B3A5C', '#1B3A5C', a, '', '', '#F5F0E8');
+            return box(330 + col * 140, 224 + row * 42, 130, 32, '#1E3A6E', '#1E3A6E', a, '', '', '#F5F0E8');
           })}
           {box(610, 224 + 3 * 42, 130, 32, '#B34040', '#B34040', 'backup', '', '', '#F5F0E8')}
 
           {/* data network zone */}
-          <rect x="320" y="412" width="420" height="86" rx="12" fill="none" stroke="#6B8CA6" strokeWidth="1.5" strokeDasharray="6 4" />
-          <text x="330" y="428" fontSize="11" fontWeight="bold" fill="#6B8CA6">data network</text>
-          {dbs.map((d, i) => box(330 + i * 140, 438, 130, 32, '#6B8CA6', '#6B8CA6', d, '', '', '#F5F0E8'))}
+          <rect x="320" y="412" width="420" height="86" rx="12" fill="none" stroke="#5B87BF" strokeWidth="1.5" strokeDasharray="6 4" />
+          <text x="330" y="428" fontSize="11" fontWeight="bold" fill="#5B87BF">data network</text>
+          {dbs.map((d, i) => box(330 + i * 140, 438, 130, 32, '#5B87BF', '#5B87BF', d, '', '', '#F5F0E8'))}
 
           {/* Backblaze B2 */}
           {box(820, 470, 160, 56, '#F5F0E8', '#B34040', 'Backblaze B2', 'encrypted backups')}
@@ -81,7 +81,7 @@ export default function SystemArch() {
           {box(30, 420, 170, 56, '#F5F0E8', '#8a8a8a', 'RustDesk relay', 'grey cloud, raw ports', '5 4')}
 
           {/* Arena AI Phase H */}
-          {box(680, 300, 290, 56, '#F5F0E8', '#D4A24C', 'Arena AI layer', 'Phase H — after launch', '6 4')}
+          {box(680, 300, 290, 56, '#F5F0E8', '#FFC107', 'Arena AI layer', 'Phase H — after launch', '6 4')}
 
           {/* arrows: traffic (green) */}
           <line x1="200" y1="280" x2="380" y2="52" stroke="#4A7C59" strokeWidth="2.5" markerEnd="url(#arrow-green)" />
@@ -93,9 +93,9 @@ export default function SystemArch() {
           <text x="215" y="270" fontSize="11" fill="#4A7C59" fontWeight="bold">local: localhost ports</text>
 
           {/* arrows: data (blue) */}
-          <line x1="530" y1="184" x2="530" y2="224" stroke="#6B8CA6" strokeWidth="2.5" markerEnd="url(#arrow-blue)" />
-          <text x="540" y="208" fontSize="11" fill="#6B8CA6" fontWeight="bold">data</text>
-          <line x1="530" y1="400" x2="530" y2="438" stroke="#6B8CA6" strokeWidth="2.5" markerEnd="url(#arrow-blue)" />
+          <line x1="530" y1="184" x2="530" y2="224" stroke="#5B87BF" strokeWidth="2.5" markerEnd="url(#arrow-blue)" />
+          <text x="540" y="208" fontSize="11" fill="#5B87BF" fontWeight="bold">data</text>
+          <line x1="530" y1="400" x2="530" y2="438" stroke="#5B87BF" strokeWidth="2.5" markerEnd="url(#arrow-blue)" />
 
           {/* arrows: backup (red) */}
           <path d="M 460 470 L 620 470 L 675 288 L 820 498" fill="none" stroke="#B34040" strokeWidth="2.5" markerEnd="url(#arrow-red)" />
@@ -106,17 +106,17 @@ export default function SystemArch() {
           <text x="130" y="520" fontSize="11" fill="#8a8a8a" fontWeight="bold">RustDesk screen share — direct, bypasses Caddy + Cloudflare</text>
 
           {/* arrow: Arena AI (yellow dashed) */}
-          <line x1="680" y1="328" x2="760" y2="328" stroke="#D4A24C" strokeWidth="2.5" strokeDasharray="6 4" markerEnd="url(#arrow-yellow)" />
-          <line x1="760" y1="328" x2="760" y2="400" stroke="#D4A24C" strokeWidth="2.5" strokeDasharray="6 4" />
-          <line x1="760" y1="400" x2="700" y2="430" stroke="#D4A24C" strokeWidth="2.5" strokeDasharray="6 4" markerEnd="url(#arrow-yellow)" />
+          <line x1="680" y1="328" x2="760" y2="328" stroke="#FFC107" strokeWidth="2.5" strokeDasharray="6 4" markerEnd="url(#arrow-yellow)" />
+          <line x1="760" y1="328" x2="760" y2="400" stroke="#FFC107" strokeWidth="2.5" strokeDasharray="6 4" />
+          <line x1="760" y1="400" x2="700" y2="430" stroke="#FFC107" strokeWidth="2.5" strokeDasharray="6 4" markerEnd="url(#arrow-yellow)" />
 
           {/* legend */}
           <g fontSize="12">
             <line x1="30" y1="600" x2="60" y2="600" stroke="#4A7C59" strokeWidth="3" /><text x="66" y="604" fill="#2A2A2A">traffic</text>
-            <line x1="140" y1="600" x2="170" y2="600" stroke="#6B8CA6" strokeWidth="3" /><text x="176" y="604" fill="#2A2A2A">data</text>
+            <line x1="140" y1="600" x2="170" y2="600" stroke="#5B87BF" strokeWidth="3" /><text x="176" y="604" fill="#2A2A2A">data</text>
             <line x1="230" y1="600" x2="260" y2="600" stroke="#B34040" strokeWidth="3" /><text x="266" y="604" fill="#2A2A2A">backup</text>
             <line x1="330" y1="600" x2="360" y2="600" stroke="#8a8a8a" strokeWidth="3" strokeDasharray="5 3" /><text x="366" y="604" fill="#2A2A2A">RustDesk (raw ports)</text>
-            <line x1="520" y1="600" x2="550" y2="600" stroke="#D4A24C" strokeWidth="3" strokeDasharray="5 3" /><text x="556" y="604" fill="#2A2A2A">Arena AI (Phase H)</text>
+            <line x1="520" y1="600" x2="550" y2="600" stroke="#FFC107" strokeWidth="3" strokeDasharray="5 3" /><text x="556" y="604" fill="#2A2A2A">Arena AI (Phase H)</text>
           </g>
         </svg>
       </div>

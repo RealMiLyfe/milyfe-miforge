@@ -7,7 +7,8 @@ export default function LoginSent() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-cream px-6 text-center">
-      <p className="font-head text-5xl font-bold text-navy">MiForge</p>
+      <img src="/logo.png" alt="MiLyfe" className="h-14 w-auto" />
+      <p className="font-head text-4xl font-bold text-navy">MiForge Founder Services</p>
       <h1 className="text-4xl">Check your email!</h1>
       <p className="text-2xl">We sent you a link.</p>
       <p className="text-[24px] font-semibold text-navy">

@@ -77,7 +77,7 @@ export default function FamilyAdd() {
         </form>
 
         <p className="mt-6 text-center">
-          <Link to="/family" className="text-[24px] font-semibold text-navy underline">Cancel</Link>
+          <Link to="/family/manage" className="text-[24px] font-semibold text-navy underline">Cancel</Link>
         </p>
       </div>
     </main>

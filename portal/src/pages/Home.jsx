@@ -10,7 +10,7 @@ const TILES = [
   { color: 'olive', icon: '🔧', label: 'My Tools', to: '/tools' },
   { color: 'blue', icon: '📅', label: 'Next Visit', to: '/visits' },
   { color: 'gold', icon: '🖥️', label: 'Share My Screen', to: '/screen-share' },
-  { color: 'purple', icon: '❤️', label: 'Family Access', to: '/family' },
+  { color: 'purple', icon: '❤️', label: 'Family Access', to: '/family/manage' },
 ];
 
 export default function Home() {

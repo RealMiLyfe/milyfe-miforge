@@ -84,7 +84,7 @@ export default function Family() {
           ))}
         </div>
 
-        <Link to="/family/add" className="btn-navy mt-8 w-full">
+        <Link to="/family/manage/add" className="btn-navy mt-8 w-full">
           + Add a Family Member
         </Link>
 

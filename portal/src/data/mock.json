@@ -3,7 +3,11 @@
   "meta": {
     "seeded_from": "nocodb/seed.sql",
     "default_client_id": 1,
-    "operator": { "name": "John", "phone": "904-562-0544", "tel": "tel:9045620544" }
+    "operator": {
+      "name": "John",
+      "phone": "904-562-0544",
+      "tel": "tel:9045620544"
+    }
   },
   "clients": [
     {
@@ -80,7 +84,17 @@
       "payment_method": "Cash",
       "summary": "John helped set up a book inventory system in Google Sheets. Every book gets a row, and Bruce can find any of them now.",
       "notes": "Built a book inventory system in Google Sheets with Arena AI: every book gets a row (title, author, year, condition, shelf). Scanned 40 books together; left a printed cheat sheet.",
-      "invoice_number": "INV-2025-001"
+      "invoice_number": "INV-2025-001",
+      "asked_for": "A way to find any book in his house without digging through boxes.",
+      "did": "Built a Google Sheets inventory (title, author, year, condition, shelf) with Arena AI; scanned 40 books together.",
+      "left_behind": "Printed cheat sheet + printed index of his sermon archive.",
+      "tools_used": [
+        "Arena AI",
+        "Google Sheets"
+      ],
+      "mood": "Delighted",
+      "follow_up": "Show him how to sort by author next visit.",
+      "ethical": "All 10 Yes"
     },
     {
       "id": 2,
@@ -94,7 +108,16 @@
       "payment_method": "CashApp",
       "summary": "Cleared out four years of junk email and organized the desktop so files are easy to find.",
       "notes": "Email filters, scam-spotting routine, desktop folder structure.",
-      "invoice_number": "INV-2025-002"
+      "invoice_number": "INV-2025-002",
+      "asked_for": "His email is a mess and he can't find files on the desktop.",
+      "did": "4 years of junk email cleared; filters + scam-spotting routine; desktop folder structure.",
+      "left_behind": "One-page email-safety cheat sheet.",
+      "tools_used": [
+        "Paper Checklist"
+      ],
+      "mood": "Relieved",
+      "follow_up": "Check filters caught anything new.",
+      "ethical": "All 10 Yes"
     },
     {
       "id": 3,
@@ -108,7 +131,16 @@
       "payment_method": null,
       "summary": "Quick visit to fix the printer and show Bruce the new photo folder.",
       "notes": "Printer driver reinstalled; photo folder walkthrough.",
-      "invoice_number": null
+      "invoice_number": null,
+      "asked_for": "Printer won't print; also wants to see the new photo folder.",
+      "did": "Reinstalled printer driver; walked through the photo folder.",
+      "left_behind": "None needed.",
+      "tools_used": [
+        "RustDesk"
+      ],
+      "mood": "Pleased",
+      "follow_up": "None.",
+      "ethical": "All 10 Yes"
     },
     {
       "id": 4,
@@ -122,7 +154,16 @@
       "payment_method": "Venmo",
       "summary": "Helped Margaret set up video calling with her granddaughter. Left a one-page cheat sheet taped to her monitor.",
       "notes": "Video calling with granddaughter; cheat sheet taped to monitor.",
-      "invoice_number": "INV-2026-001"
+      "invoice_number": "INV-2026-001",
+      "asked_for": "Video calling with her granddaughter.",
+      "did": "Set up video calling end to end; practiced twice.",
+      "left_behind": "One-page cheat sheet taped to her monitor.",
+      "tools_used": [
+        "Video Calling Station template"
+      ],
+      "mood": "Emotional (happy)",
+      "follow_up": "48-hour check-in email (n8n).",
+      "ethical": "All 10 Yes"
     },
     {
       "id": 5,
@@ -222,9 +263,30 @@
     }
   ],
   "family": [
-    { "id": 1, "client_id": 1, "name": "Sarah", "relationship": "Daughter", "phone": "904-555-0101", "role": "Full View" },
-    { "id": 2, "client_id": 1, "name": "Michael", "relationship": "Son", "phone": "904-555-0102", "role": "Limited View" },
-    { "id": 3, "client_id": 1, "name": "Deacon James", "relationship": "Church", "phone": "904-555-0103", "role": "Decision Partner" }
+    {
+      "id": 1,
+      "client_id": 1,
+      "name": "Sarah",
+      "relationship": "Daughter",
+      "phone": "904-555-0101",
+      "role": "Full View"
+    },
+    {
+      "id": 2,
+      "client_id": 1,
+      "name": "Michael",
+      "relationship": "Son",
+      "phone": "904-555-0102",
+      "role": "Limited View"
+    },
+    {
+      "id": 3,
+      "client_id": 1,
+      "name": "Deacon James",
+      "relationship": "Church",
+      "phone": "904-555-0103",
+      "role": "Decision Partner"
+    }
   ],
   "jewels": [
     {
@@ -243,16 +305,751 @@
     }
   ],
   "consent_log": [
-    { "id": 1, "client_id": 1, "consent_type": "Verbal", "scope": "Remote access to his desktop during the scheduled visit", "granted": true, "granted_date": "2025-10-14", "revoked_date": null, "notes": "Confirmed by phone before the visit; access ended when the visit ended." },
-    { "id": 2, "client_id": 1, "consent_type": "Written", "scope": "Store visit notes and invoice records in MiForge systems", "granted": true, "granted_date": "2025-10-14", "revoked_date": null, "notes": "Paper consent form signed at the visit; copy in Nextcloud clients/Bruce/consent/." },
-    { "id": 3, "client_id": 2, "consent_type": "Written", "scope": "Remote access to her desktop (Windows 7) for monthly check-ins", "granted": true, "granted_date": "2026-01-20", "revoked_date": null, "notes": "Signed consent form on file in Nextcloud clients/Margaret/consent/." },
-    { "id": 4, "client_id": 2, "consent_type": "Written", "scope": "One photo of the cheat-sheet setup for our records", "granted": true, "granted_date": "2026-01-20", "revoked_date": null, "notes": "Monitor + cheat sheet only, no faces." },
-    { "id": 5, "client_id": 2, "consent_type": "Implied", "scope": "Phone follow-ups about unpaid invoices", "granted": true, "granted_date": "2026-01-18", "revoked_date": null, "notes": "Prefers phone over email." },
-    { "id": 6, "client_id": 3, "consent_type": "Verbal", "scope": "Contact by phone/email about a future booking", "granted": true, "granted_date": "2026-01-25", "revoked_date": null, "notes": "No remote access granted yet - no session booked." }
+    {
+      "id": 1,
+      "client_id": 1,
+      "consent_type": "Verbal",
+      "scope": "Remote access to his desktop during the scheduled visit",
+      "granted": true,
+      "granted_date": "2025-10-14",
+      "revoked_date": null,
+      "notes": "Confirmed by phone before the visit; access ended when the visit ended."
+    },
+    {
+      "id": 2,
+      "client_id": 1,
+      "consent_type": "Written",
+      "scope": "Store visit notes and invoice records in MiForge systems",
+      "granted": true,
+      "granted_date": "2025-10-14",
+      "revoked_date": null,
+      "notes": "Paper consent form signed at the visit; copy in Nextcloud clients/Bruce/consent/."
+    },
+    {
+      "id": 3,
+      "client_id": 2,
+      "consent_type": "Written",
+      "scope": "Remote access to her desktop (Windows 7) for monthly check-ins",
+      "granted": true,
+      "granted_date": "2026-01-20",
+      "revoked_date": null,
+      "notes": "Signed consent form on file in Nextcloud clients/Margaret/consent/."
+    },
+    {
+      "id": 4,
+      "client_id": 2,
+      "consent_type": "Written",
+      "scope": "One photo of the cheat-sheet setup for our records",
+      "granted": true,
+      "granted_date": "2026-01-20",
+      "revoked_date": null,
+      "notes": "Monitor + cheat sheet only, no faces."
+    },
+    {
+      "id": 5,
+      "client_id": 2,
+      "consent_type": "Implied",
+      "scope": "Phone follow-ups about unpaid invoices",
+      "granted": true,
+      "granted_date": "2026-01-18",
+      "revoked_date": null,
+      "notes": "Prefers phone over email."
+    },
+    {
+      "id": 6,
+      "client_id": 3,
+      "consent_type": "Verbal",
+      "scope": "Contact by phone/email about a future booking",
+      "granted": true,
+      "granted_date": "2026-01-25",
+      "revoked_date": null,
+      "notes": "No remote access granted yet - no session booked."
+    }
   ],
   "messages": [
-    { "id": 1, "client_id": 1, "from": "John", "to": "Bruce", "date": "2025-10-15", "text": "Hi Bruce, it's John. The book inventory sheet is ready whenever you want to add more books." },
-    { "id": 2, "client_id": 1, "from": "Bruce", "to": "John", "date": "2025-10-16", "text": "Thanks John! I added 40 books last night. It works great." },
-    { "id": 3, "client_id": 1, "from": "John", "to": "Bruce", "date": "2025-10-16", "text": "That's wonderful to hear. Next visit I'll show you how to sort by author. Talk soon!" }
-  ]
+    {
+      "id": 1,
+      "client_id": 1,
+      "from": "John",
+      "to": "Bruce",
+      "date": "2025-10-15",
+      "text": "Hi Bruce, it's John. The book inventory sheet is ready whenever you want to add more books."
+    },
+    {
+      "id": 2,
+      "client_id": 1,
+      "from": "Bruce",
+      "to": "John",
+      "date": "2025-10-16",
+      "text": "Thanks John! I added 40 books last night. It works great."
+    },
+    {
+      "id": 3,
+      "client_id": 1,
+      "from": "John",
+      "to": "Bruce",
+      "date": "2025-10-16",
+      "text": "That's wonderful to hear. Next visit I'll show you how to sort by author. Talk soon!"
+    }
+  ],
+  "admin": {
+    "operator_name": "John",
+    "password": "miforge-admin",
+    "today": {
+      "date": "2026-10-31",
+      "stats": "3 visits today · $450 projected · 2 follow-ups due",
+      "schedule": [
+        {
+          "time": "10:00 AM",
+          "client_id": 2,
+          "client": "Margaret",
+          "tier": "Partnership",
+          "label": "Monthly Check-In",
+          "visit_id": 4
+        },
+        {
+          "time": "2:00 PM",
+          "client_id": 1,
+          "client": "Bruce",
+          "tier": "Session",
+          "label": "Follow-Up",
+          "visit_id": 2
+        },
+        {
+          "time": "4:00 PM",
+          "client_id": 3,
+          "client": "Robert & Diane",
+          "tier": "Lead",
+          "label": "First Visit",
+          "visit_id": 5
+        }
+      ],
+      "attention": [
+        {
+          "icon": "⚠",
+          "kind": "warn",
+          "text": "Margaret's follow-up from Oct 12 is 2 days overdue"
+        },
+        {
+          "icon": "⚠",
+          "kind": "danger",
+          "text": "Invoice #003 (Robert) unpaid for 10 days"
+        },
+        {
+          "icon": "🔔",
+          "kind": "info",
+          "text": "Deacon James (Decision Partner) needs to approve Bruce's $450 photo project"
+        }
+      ],
+      "week": {
+        "visits_booked": 5,
+        "projected": 900,
+        "followups_due": 3,
+        "referral": "Robert from Margaret"
+      }
+    },
+    "trust_notes": {
+      "1": "74-year-old preacher. Patient, kind, grateful. Strong congregation referral potential.",
+      "2": "81-year-old widow. Zero tech comfort, Windows 7. Prefers phone. One-page cheat sheets only.",
+      "3": "Couple in their 70s, not booked yet. Met via Nextdoor / Margaret. Photo + email interest."
+    },
+    "revenue": {
+      "month_label": "$1,250 this month",
+      "mrr": 200,
+      "one_time": 1050,
+      "outstanding": 300,
+      "lifetime": 2800,
+      "methods": [
+        {
+          "label": "Cash",
+          "pct": 60,
+          "color": "#7A8B5C"
+        },
+        {
+          "label": "CashApp",
+          "pct": 20,
+          "color": "#1B3A5C"
+        },
+        {
+          "label": "Venmo",
+          "pct": 10,
+          "color": "#6B8CA6"
+        },
+        {
+          "label": "Check",
+          "pct": 10,
+          "color": "#D4A24C"
+        }
+      ]
+    },
+    "templates": [
+      {
+        "id": 1,
+        "name": "Book Inventory System",
+        "category": "Productivity",
+        "times_used": 3,
+        "difficulty": "Medium",
+        "status": "Awaiting Operator Access",
+        "note": "Share the Google Sheet URL to activate.",
+        "active": false
+      },
+      {
+        "id": 2,
+        "name": "Video Calling Station",
+        "category": "Communication",
+        "times_used": 5,
+        "difficulty": "Easy",
+        "status": "Active",
+        "note": "",
+        "active": true
+      },
+      {
+        "id": 3,
+        "name": "Photo Archive Organizer",
+        "category": "Photos",
+        "times_used": 2,
+        "difficulty": "Hard",
+        "status": "Active",
+        "note": "",
+        "active": true
+      },
+      {
+        "id": 4,
+        "name": "Password Safety Setup",
+        "category": "Security",
+        "times_used": 8,
+        "difficulty": "Easy",
+        "status": "Active",
+        "note": "",
+        "active": true
+      },
+      {
+        "id": 5,
+        "name": "Email Cleanup Sprint",
+        "category": "Inbox",
+        "times_used": 4,
+        "difficulty": "Medium",
+        "status": "Active",
+        "note": "",
+        "active": true
+      }
+    ],
+    "flags": [
+      {
+        "key": "background_checked",
+        "label": "Background checked",
+        "on": false,
+        "note": "Enable only after obtaining a report you can show."
+      },
+      {
+        "key": "insured",
+        "label": "Fully insured",
+        "on": false,
+        "note": "Enable only after obtaining proof of insurance."
+      },
+      {
+        "key": "testimonials",
+        "label": "Testimonials",
+        "on": false,
+        "note": "Enable only after obtaining written permission from each client quoted."
+      }
+    ],
+    "brand": {
+      "name": "MiForge by MiLyfe",
+      "phone": "904-562-0544",
+      "domain": "milyfe.fun (production)",
+      "colors": {
+        "navy": "#1B3A5C",
+        "cream": "#F5F0E8",
+        "rust": "#C65D3B",
+        "charcoal": "#2A2A2A"
+      }
+    },
+    "jewels": [
+      {
+        "id": 1,
+        "client_id": 1,
+        "client": "Bruce",
+        "quote": "Technology should serve the sermon, not interrupt it.",
+        "category": "Calling",
+        "date": "2025-10-14",
+        "context": "Bruce, after the first inventory session.",
+        "permission": false
+      },
+      {
+        "id": 2,
+        "client_id": 2,
+        "client": "Margaret",
+        "quote": "My husband always said the machine should work for you, not the other way around. I think he'd like you.",
+        "category": "Family",
+        "date": "2026-01-20",
+        "context": "Video-calling setup with her granddaughter.",
+        "permission": false
+      }
+    ],
+    "consent_entries": [
+      {
+        "date": "Oct 10, 2025",
+        "time": "9:00 AM",
+        "text": "Privacy & Trust Agreement signed"
+      },
+      {
+        "date": "Oct 10, 2025",
+        "time": "10:00 AM",
+        "text": "Family access granted to Sarah (Full View)"
+      },
+      {
+        "date": "Oct 14, 2025",
+        "time": "2:30 PM",
+        "text": "Remote session start (screen share)"
+      },
+      {
+        "date": "Oct 14, 2025",
+        "time": "2:55 PM",
+        "text": "Remote session end (25 min)"
+      },
+      {
+        "date": "Oct 14, 2025",
+        "time": "5:15 PM",
+        "text": "Visit completed; invoice INV-2025-001 paid in cash"
+      }
+    ],
+    "decision": {
+      "pending": 1,
+      "title": "Photo organizing system for Bruce",
+      "project": "Project",
+      "amount": 450,
+      "client": "Bruce",
+      "approver": "Deacon James (Decision Partner)"
+    }
+  },
+  "system": {
+    "containers": [
+      "caddy",
+      "postgres",
+      "mariadb",
+      "redis",
+      "nocodb",
+      "nextcloud",
+      "vaultwarden",
+      "ninja",
+      "kuma",
+      "n8n",
+      "ntfy",
+      "chatwoot",
+      "formbricks",
+      "backup"
+    ],
+    "memory": {
+      "budget_gb": 24,
+      "red_line_gb": 22,
+      "segments": [
+        {
+          "label": "caddy",
+          "gb": 0.25,
+          "week": 1,
+          "color": "#1B3A5C"
+        },
+        {
+          "label": "postgres",
+          "gb": 2,
+          "week": 1,
+          "color": "#6B8CA6"
+        },
+        {
+          "label": "mariadb",
+          "gb": 1,
+          "week": 1,
+          "color": "#6B8CA6"
+        },
+        {
+          "label": "redis",
+          "gb": 0.25,
+          "week": 1,
+          "color": "#B34040"
+        },
+        {
+          "label": "nocodb",
+          "gb": 1,
+          "week": 1,
+          "color": "#C65D3B"
+        },
+        {
+          "label": "nextcloud",
+          "gb": 1,
+          "week": 1,
+          "color": "#6B8CA6"
+        },
+        {
+          "label": "vaultwarden",
+          "gb": 0.25,
+          "week": 1,
+          "color": "#8B7AA6"
+        },
+        {
+          "label": "invoice ninja",
+          "gb": 1,
+          "week": 1,
+          "color": "#4A7C59"
+        },
+        {
+          "label": "uptime kuma",
+          "gb": 0.5,
+          "week": 1,
+          "color": "#D4A24C"
+        },
+        {
+          "label": "ntfy",
+          "gb": 0.1,
+          "week": 1,
+          "color": "#C4872A"
+        },
+        {
+          "label": "n8n",
+          "gb": 1,
+          "week": 2,
+          "color": "#C65D3B"
+        },
+        {
+          "label": "chatwoot",
+          "gb": 1.5,
+          "week": 2,
+          "color": "#8B7AA6"
+        },
+        {
+          "label": "formbricks",
+          "gb": 0.75,
+          "week": 2,
+          "color": "#4A7C59"
+        },
+        {
+          "label": "backup",
+          "gb": 0.1,
+          "week": 2,
+          "color": "#B34040"
+        }
+      ]
+    },
+    "flow_steps": [
+      {
+        "icon": "📞",
+        "title": "Margaret calls John at 9am.",
+        "text": "She can't get video calling to work and her granddaughter's birthday is this weekend.",
+        "visual": "Incoming call — 904-555-0187"
+      },
+      {
+        "icon": "📊",
+        "title": "John checks the Daily Dashboard.",
+        "text": "Margaret is on today's schedule at 10:00 AM. Her follow-up from last month is flagged.",
+        "visual": "Admin dashboard screenshot"
+      },
+      {
+        "icon": "🚗",
+        "title": "John drives to Margaret's house.",
+        "text": "Mandarin, Jacksonville. 15 minutes. He brings the printed cheat sheet from last time.",
+        "visual": "Map pin — Mandarin, Jacksonville FL"
+      },
+      {
+        "icon": "⏱️",
+        "title": "John opens the Session Screen and starts the timer.",
+        "text": "Before tab checklist: reviewed last notes, checked follow-ups, prepared templates.",
+        "visual": "Session screen — timer 0:00"
+      },
+      {
+        "icon": "📹",
+        "title": "John helps Margaret set up video calling with her granddaughter.",
+        "text": "During tab: what she asked for, what he did, tools used (Video Calling Station template).",
+        "visual": "Visit notes being typed"
+      },
+      {
+        "icon": "💎",
+        "title": "Margaret says something beautiful. John captures a Jewel.",
+        "text": "\"My husband always said the machine should work for you...\" — saved with permission toggle OFF.",
+        "visual": "Jewel card"
+      },
+      {
+        "icon": "✅",
+        "title": "John completes the Ethical Checkpoint — all 10 Yes.",
+        "text": "Did she understand? Did he explain why? Did he leave her more capable? All Yes.",
+        "visual": "10/10 checkpoint toggles green"
+      },
+      {
+        "icon": "🧾",
+        "title": "John marks the visit Complete and logs a $200 Venmo payment.",
+        "text": "Invoice INV-2026-001 marked Paid. Receipt given in the portal.",
+        "visual": "Invoice marked Paid"
+      },
+      {
+        "icon": "⚙️",
+        "title": "n8n fires the 48-hour follow-up workflow.",
+        "text": "Schedule trigger → NocoDB lookup → filter (last visit = 2 days ago) → email → ntfy.",
+        "visual": "n8n workflow diagram"
+      },
+      {
+        "icon": "✉️",
+        "title": "Two days later, Margaret gets a warm check-in email.",
+        "text": "\"How did the visit go? Remember: your cheat sheet is taped to the monitor.\"",
+        "visual": "Email preview"
+      },
+      {
+        "icon": "👨‍👩‍👧",
+        "title": "Margaret's family sees the visit in the Family Portal.",
+        "text": "Sarah (Full View) sees the summary; Deacon James would approve any project over $300.",
+        "visual": "Family portal screenshot"
+      },
+      {
+        "icon": "💾",
+        "title": "Backup runs at 3:15am. Everything encrypted and shipped to B2.",
+        "text": "(Local demo: mock backup container just logs 'backup complete'.)",
+        "visual": "Backup log"
+      }
+    ],
+    "checklist": [
+      {
+        "label": "Docker Compose stack runs locally",
+        "done": true
+      },
+      {
+        "label": "All images pinned + multi-arch (amd64/arm64)",
+        "done": true
+      },
+      {
+        "label": "Per-container memory limits set (<8 GB laptop)",
+        "done": true
+      },
+      {
+        "label": ".env.example with dev-safe values",
+        "done": true
+      },
+      {
+        "label": "Postgres DBs pre-created (nocodb/nextcloud/n8n/formbricks/chatwoot)",
+        "done": true
+      },
+      {
+        "label": "MariaDB `ninja` DB pre-created",
+        "done": true
+      },
+      {
+        "label": "NocoDB seeded: 7 tables + sample data",
+        "done": true
+      },
+      {
+        "label": "Sample clients/visits/invoices/referral/jewels/consent seeded",
+        "done": true
+      },
+      {
+        "label": "Nextcloud clients/ folder tree pre-created",
+        "done": true
+      },
+      {
+        "label": "Uptime Kuma monitors pre-added for every service",
+        "done": true
+      },
+      {
+        "label": "n8n: 3 workflows pre-imported",
+        "done": true
+      },
+      {
+        "label": "Marketing site: all 4 pages built",
+        "done": true
+      },
+      {
+        "label": "Client portal: all screens navigable",
+        "done": true
+      },
+      {
+        "label": "Operator admin screens built (dashboard/profile/session/revenue/templates/settings)",
+        "done": true
+      },
+      {
+        "label": "Family portal (3 access levels) built",
+        "done": true
+      },
+      {
+        "label": "System overview (architecture/flow/memory/checklist) built",
+        "done": true
+      },
+      {
+        "label": "Design tokens + WCAG focus rings + responsive at 375px/1440px",
+        "done": true
+      },
+      {
+        "label": "No telemetry/analytics anywhere",
+        "done": true
+      },
+      {
+        "label": "Production DNS for milyfe.fun via Cloudflare",
+        "done": false
+      },
+      {
+        "label": "Deploy site/ to Cloudflare Pages",
+        "done": false
+      },
+      {
+        "label": "Deploy portal/ to Cloudflare Pages",
+        "done": false
+      },
+      {
+        "label": "PWA installed on client phones (prod service worker)",
+        "done": false
+      },
+      {
+        "label": "Custom domain + SSL certificates",
+        "done": false
+      },
+      {
+        "label": "OIDC provider for Outline SSO (or formally cut Outline)",
+        "done": false
+      },
+      {
+        "label": "Real transactional SMTP for portal emails",
+        "done": false
+      },
+      {
+        "label": "ntfy auth tokens in production",
+        "done": false
+      },
+      {
+        "label": "Vaultwarden SMTP for invites + admin hardening",
+        "done": false
+      },
+      {
+        "label": "Rotate Invoice Ninja APP_KEY for production",
+        "done": false
+      },
+      {
+        "label": "Backblaze B2 bucket + API keys",
+        "done": false
+      },
+      {
+        "label": "Replace mock backup with restic/kopia to B2",
+        "done": false
+      },
+      {
+        "label": "Backup restore test (prove restores work)",
+        "done": false
+      },
+      {
+        "label": "Uptime Kuma public status page + alerts (ntfy/SMS)",
+        "done": false
+      },
+      {
+        "label": "Chatwoot inbox + inbound email channel",
+        "done": false
+      },
+      {
+        "label": "Formbricks production environment keys",
+        "done": false
+      },
+      {
+        "label": "n8n webhooks pointed at production domain",
+        "done": false
+      },
+      {
+        "label": "NocoDB API tokens wired into n8n workflows",
+        "done": false
+      },
+      {
+        "label": "RustDesk relay (self-hosted 'grey cloud' or hosted)",
+        "done": false
+      },
+      {
+        "label": "Screen-share consent events logged to prod DB",
+        "done": false
+      },
+      {
+        "label": "Family portal role enforcement (row-level security)",
+        "done": false
+      },
+      {
+        "label": "Rate limiting on Caddy edge",
+        "done": false
+      },
+      {
+        "label": "Log rotation + offsite log shipping",
+        "done": false
+      },
+      {
+        "label": "Monitor the Oracle VM itself (disk/CPU/memory)",
+        "done": false
+      },
+      {
+        "label": "Automated OS security updates",
+        "done": false
+      },
+      {
+        "label": "2FA on all admin surfaces",
+        "done": false
+      },
+      {
+        "label": "Florida attorney review of Privacy & Trust Agreement (currently DRAFT)",
+        "done": false
+      },
+      {
+        "label": "Background check report obtained (flag stays OFF until then)",
+        "done": false
+      },
+      {
+        "label": "Proof of insurance obtained (flag stays OFF until then)",
+        "done": false
+      },
+      {
+        "label": "Written testimonial permissions collected (flag stays OFF until then)",
+        "done": false
+      },
+      {
+        "label": "Launch readiness review",
+        "done": false
+      },
+      {
+        "label": "Go-live + first real client visit",
+        "done": false
+      }
+    ]
+  },
+  "family_portal": {
+    "personas": [
+      {
+        "email": "sarah@example.com",
+        "name": "Sarah",
+        "relationship": "Daughter",
+        "client": "Bruce Scher",
+        "client_relation": "your father",
+        "level": "Full View"
+      },
+      {
+        "email": "michael@example.com",
+        "name": "Michael",
+        "relationship": "Son",
+        "client": "Bruce Scher",
+        "client_relation": "your father",
+        "level": "Limited View"
+      },
+      {
+        "email": "deacon@example.com",
+        "name": "Deacon James",
+        "relationship": "Church friend",
+        "client": "Bruce Scher",
+        "client_relation": "your church friend",
+        "level": "Decision Partner"
+      }
+    ],
+    "activity": [
+      {
+        "date": "Oct 14, 2026",
+        "time": "2:30 PM",
+        "text": "Screen sharing session with John, lasted 25 min"
+      },
+      {
+        "date": "Oct 10, 2026",
+        "time": "10:00 AM",
+        "text": "Family access granted to you"
+      },
+      {
+        "date": "Oct 10, 2026",
+        "time": "9:00 AM",
+        "text": "Privacy agreement signed"
+      }
+    ]
+  }
 }

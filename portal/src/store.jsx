@@ -10,13 +10,26 @@ export function StoreProvider({ children }) {
   const [family, setFamily] = useState(mock.family.filter((f) => f.client_id === defaultId));
   const [messages, setMessages] = useState(mock.messages.filter((m) => m.client_id === defaultId));
   const [visits] = useState(mock.visits.filter((v) => v.client_id === defaultId));
-  const [tools] = useState(mock.tools.filter((t) => t.client_id === defaultId));
-  const [invoices] = useState(mock.invoices);
+  const [tools, setTools] = useState(mock.tools.filter((t) => t.client_id === defaultId));
+  const [invoices, setInvoices] = useState(mock.invoices);
   const [jewels] = useState(mock.jewels.filter((j) => j.client_id === defaultId));
+
+  // mock auth sessions (local dev only)
+  const [adminAuthed, setAdminAuthed] = useState(false);
+  const [familySession, setFamilySession] = useState(null); // { name, level, client, client_relation }
 
   return (
     <StoreContext.Provider
-      value={{ mock, client, family, setFamily, messages, setMessages, visits, tools, invoices, jewels }}
+      value={{
+        mock, client,
+        family, setFamily,
+        messages, setMessages,
+        visits, tools, setTools,
+        invoices, setInvoices,
+        jewels,
+        adminAuthed, setAdminAuthed,
+        familySession, setFamilySession,
+      }}
     >
       {children}
     </StoreContext.Provider>

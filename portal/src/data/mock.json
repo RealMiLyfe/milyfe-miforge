@@ -4,10 +4,10 @@
     "seeded_from": "nocodb/seed.sql",
     "default_client_id": 1,
     "operator": {
-      "name": "John",
+      "name": "Carnell Lee",
       "phone": "904-562-0544",
       "tel": "tel:9045620544",
-      "email": "john@miforgefs.milyfe.fun",
+      "email": "carnell@miforgefs.milyfe.fun",
       "hours": "Tue–Thu 9–5 · Fri 9–3 · Sat 10–2 by appointment · Sun–Mon off",
       "service_area": "Jacksonville, FL only"
     }
@@ -85,7 +85,7 @@
       "amount_due": 150.0,
       "amount_paid": 150.0,
       "payment_method": "Cash",
-      "summary": "John helped set up a book inventory system in Google Sheets. Every book gets a row, and Bruce can find any of them now.",
+      "summary": "Carnell helped set up a book inventory system in Google Sheets. Every book gets a row, and Bruce can find any of them now.",
       "notes": "Built a book inventory system in Google Sheets with Arena AI: every book gets a row (title, author, year, condition, shelf). Scanned 40 books together; left a printed cheat sheet.",
       "invoice_number": "INV-2025-001",
       "asked_for": "A way to find any book in his house without digging through boxes.",
@@ -251,9 +251,9 @@
       "client_id": 1,
       "icon": "📘",
       "name": "Book Inventory System",
-      "description": "The sheet John built for me to list books.",
+      "description": "The sheet Carnell built for me to list books.",
       "status": "Awaiting Operator Access",
-      "status_note": "John is getting this ready for you."
+      "status_note": "Carnell is getting this ready for you."
     },
     {
       "id": 2,
@@ -373,30 +373,30 @@
     {
       "id": 1,
       "client_id": 1,
-      "from": "John",
+      "from": "Carnell",
       "to": "Bruce",
       "date": "2025-10-15",
-      "text": "Hi Bruce, it's John. The book inventory sheet is ready whenever you want to add more books."
+      "text": "Hi Bruce, it's Carnell. The book inventory sheet is ready whenever you want to add more books."
     },
     {
       "id": 2,
       "client_id": 1,
       "from": "Bruce",
-      "to": "John",
+      "to": "Carnell",
       "date": "2025-10-16",
-      "text": "Thanks John! I added 40 books last night. It works great."
+      "text": "Thanks Carnell! I added 40 books last night. It works great."
     },
     {
       "id": 3,
       "client_id": 1,
-      "from": "John",
+      "from": "Carnell",
       "to": "Bruce",
       "date": "2025-10-16",
       "text": "That's wonderful to hear. Next visit I'll show you how to sort by author. Talk soon!"
     }
   ],
   "admin": {
-    "operator_name": "John",
+    "operator_name": "Carnell Lee",
     "password": "miforge-admin",
     "today": {
       "date": "2026-10-31",
@@ -743,49 +743,49 @@
     "flow_steps": [
       {
         "icon": "📞",
-        "title": "Margaret calls John at 9am.",
+        "title": "Margaret calls Carnell at 9am.",
         "text": "She can't get video calling to work and her granddaughter's birthday is this weekend.",
         "visual": "Incoming call — 904-555-0187"
       },
       {
         "icon": "📊",
-        "title": "John checks the Daily Dashboard.",
+        "title": "Carnell checks the Daily Dashboard.",
         "text": "Margaret is on today's schedule at 10:00 AM. Her follow-up from last month is flagged.",
         "visual": "Admin dashboard screenshot"
       },
       {
         "icon": "🚗",
-        "title": "John drives to Margaret's house.",
+        "title": "Carnell drives to Margaret's house.",
         "text": "Mandarin, Jacksonville. 15 minutes. He brings the printed cheat sheet from last time.",
         "visual": "Map pin — Mandarin, Jacksonville FL"
       },
       {
         "icon": "⏱️",
-        "title": "John opens the Session Screen and starts the timer.",
+        "title": "Carnell opens the Session Screen and starts the timer.",
         "text": "Before tab checklist: reviewed last notes, checked follow-ups, prepared templates.",
         "visual": "Session screen — timer 0:00"
       },
       {
         "icon": "📹",
-        "title": "John helps Margaret set up video calling with her granddaughter.",
+        "title": "Carnell helps Margaret set up video calling with her granddaughter.",
         "text": "During tab: what she asked for, what he did, tools used (Video Calling Station template).",
         "visual": "Visit notes being typed"
       },
       {
         "icon": "💎",
-        "title": "Margaret says something beautiful. John captures a Jewel.",
+        "title": "Margaret says something beautiful. Carnell captures a Jewel.",
         "text": "\"My husband always said the machine should work for you...\" — saved with permission toggle OFF.",
         "visual": "Jewel card"
       },
       {
         "icon": "✅",
-        "title": "John completes the Ethical Checkpoint — all 10 Yes.",
+        "title": "Carnell completes the Ethical Checkpoint — all 10 Yes.",
         "text": "Did she understand? Did he explain why? Did he leave her more capable? All Yes.",
         "visual": "10/10 checkpoint toggles green"
       },
       {
         "icon": "🧾",
-        "title": "John marks the visit Complete and logs a $200 Venmo payment.",
+        "title": "Carnell marks the visit Complete and logs a $200 Venmo payment.",
         "text": "Invoice INV-2026-001 marked Paid. Receipt given in the portal.",
         "visual": "Invoice marked Paid"
       },
@@ -1048,7 +1048,7 @@
       {
         "date": "Oct 14, 2026",
         "time": "2:30 PM",
-        "text": "Screen sharing session with John, lasted 25 min"
+        "text": "Screen sharing session with Carnell, lasted 25 min"
       },
       {
         "date": "Oct 10, 2026",

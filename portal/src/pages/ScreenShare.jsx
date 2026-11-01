@@ -18,19 +18,19 @@ export default function ScreenShare() {
     <main className="min-h-screen bg-cream px-6 pb-10">
       <Wordmark />
       <div className="mx-auto mt-8 w-full max-w-2xl">
-        <h1 className="text-4xl">Share Your Screen with John</h1>
+        <h1 className="text-4xl">Share Your Screen with Carnell</h1>
 
         <div className="card mt-6 text-[22px]">
           <p className="font-bold">When this is ON:</p>
-          <p className="mt-2">✓ John can see what's on your screen</p>
-          <p className="mt-1">✓ John can move your mouse and type for you</p>
+          <p className="mt-2">✓ Carnell can see what's on your screen</p>
+          <p className="mt-1">✓ Carnell can move your mouse and type for you</p>
 
           <p className="mt-4 font-bold">When this is OFF:</p>
-          <p className="mt-2">✗ John cannot see your screen</p>
-          <p className="mt-1">✗ John cannot control your computer</p>
+          <p className="mt-2">✗ Carnell cannot see your screen</p>
+          <p className="mt-1">✗ Carnell cannot control your computer</p>
 
           <p className="mt-4">
-            John will not open your banking or passwords unless you ask him to and watch him do it.
+            Carnell will not open your banking or passwords unless you ask him to and watch him do it.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ export default function ScreenShare() {
 
         {/* honesty note */}
         <p className="measure mt-6 text-lg text-charcoal/80">
-          If the RustDesk app stays open on your computer after you stop sharing, John could
+          If the RustDesk app stays open on your computer after you stop sharing, Carnell could
           technically still see your screen. If you're worried, close the RustDesk app — the small
           icon near the clock in the corner of your screen.
         </p>

@@ -5,7 +5,7 @@ import { useStore } from '../store.jsx';
 import { Link } from 'react-router-dom';
 
 const TILES = [
-  { color: 'rust', icon: '📞', label: 'Call John', to: 'tel:9045620544', external: true },
+  { color: 'rust', icon: '📞', label: 'Call Carnell', to: 'tel:9045620544', external: true },
   { color: 'navy', icon: '💬', label: 'Message Us', to: '/messages' },
   { color: 'olive', icon: '🔧', label: 'My Tools', to: '/tools' },
   { color: 'blue', icon: '📅', label: 'Next Visit', to: '/visits' },

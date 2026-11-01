@@ -10,7 +10,7 @@ export default function OfflineScreen() {
   return (
     <main class="flex min-h-screen flex-col items-center justify-center gap-6 bg-cream px-6 text-center opacity-90">
       <p class="font-head text-4xl font-bold text-navy">You're offline.</p>
-      <p class="measure text-2xl">You can still call John.</p>
+      <p class="measure text-2xl">You can still call Carnell.</p>
       <a href={op.tel} class="btn-rust w-full max-w-md text-[28px]">
         📞 Call {op.phone}
       </a>

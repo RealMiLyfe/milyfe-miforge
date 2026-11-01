@@ -56,19 +56,19 @@ export default function FamilyHome() {
           <section className="card mt-6 !border-purple !p-5">
             <h2 className="font-head text-2xl text-navy">🔔 {d.pending} Decision Waiting for Your OK</h2>
             <p className="mt-2 text-xl">
-              John wants to build {d.client} a {d.title.toLowerCase()} — {d.project}, ${d.amount}.
+              Carnell wants to build {d.client} a {d.title.toLowerCase()} — {d.project}, ${d.amount}.
             </p>
             {decision === null ? (
               <div className="mt-4 flex flex-wrap gap-3">
                 <button type="button" onClick={() => setDecision('approved')} className="min-h-touch rounded-btn bg-success px-5 py-2 font-bold text-cream">Approve</button>
                 <button type="button" onClick={() => setDecision('declined')} className="min-h-touch rounded-btn bg-danger px-5 py-2 font-bold text-cream">Decline</button>
-                <a href={mock.meta.operator.tel} className="min-h-touch rounded-btn border-2 border-navy px-5 py-2 font-bold text-navy">Call John First</a>
+                <a href={mock.meta.operator.tel} className="min-h-touch rounded-btn border-2 border-navy px-5 py-2 font-bold text-navy">Call Carnell First</a>
               </div>
             ) : (
               <p className="mt-4 font-bold text-navy">
-                {decision === 'approved' && '✓ Approved — John has been notified.'}
-                {decision === 'declined' && '✗ Declined — John has been notified.'}
-                {decision === 'call' && '📞 Calling John...'}
+                {decision === 'approved' && '✓ Approved — Carnell has been notified.'}
+                {decision === 'declined' && '✗ Declined — Carnell has been notified.'}
+                {decision === 'call' && '📞 Calling Carnell...'}
               </p>
             )}
           </section>
@@ -126,7 +126,7 @@ export default function FamilyHome() {
         )}
 
         <p className="mt-10">
-          <a href={mock.meta.operator.tel} className="btn-rust inline-flex w-full">📞 Call John: {mock.meta.operator.phone}</a>
+          <a href={mock.meta.operator.tel} className="btn-rust inline-flex w-full">📞 Call Carnell: {mock.meta.operator.phone}</a>
         </p>
       </div>
     </main>

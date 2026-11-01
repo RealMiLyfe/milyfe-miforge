@@ -89,7 +89,7 @@
         "toEmail": "={{ $json.email }}",
         "subject": "How did the visit go, {{ $json.full_name }}?",
         "emailFormat": "text",
-        "text": "Hi {{ $json.full_name }},\n\nIt's been a couple of days since our visit on {{ $json.last_visit_date }} - we hope everything is working the way you want.\n\nIf anything felt confusing, reply and we'll walk through it again. And remember: your cheat sheet is taped to the monitor.\n\n- The MiForge team"
+        "text": "Hi {{ $json.full_name }},\n\nIt's been a couple of days since our visit on {{ $json.last_visit_date }} - we hope everything is working the way you want.\n\nIf anything felt confusing, reply and we'll walk through it again. And remember: your cheat sheet is taped to the monitor.\n\n- Carnell Lee\n\nMiForge Founder Services · 904-562-0544"
       },
       "id": "2430942f-5d50-4961-9df9-e2512ee612be",
       "name": "Send follow-up email",

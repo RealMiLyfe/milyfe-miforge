@@ -47,7 +47,7 @@ export default function Account() {
           {confirmDelete && !deleteSent && (
             <div className="card border-danger" role="alert">
               <p className="text-[22px] font-semibold">
-                This will send a request to John. He'll call you to confirm before anything is
+                This will send a request to Carnell. He'll call you to confirm before anything is
                 deleted. Are you sure?
               </p>
               <div className="mt-4 flex gap-4">
@@ -72,7 +72,7 @@ export default function Account() {
           {deleteSent && (
             <div className="card border-success" role="status">
               <p className="text-[22px] font-semibold text-success">
-                Request sent. John will call you to confirm before anything is deleted.
+                Request sent. Carnell will call you to confirm before anything is deleted.
               </p>
             </div>
           )}

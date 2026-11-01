@@ -38,7 +38,7 @@ export default function Login() {
       <p className="text-center text-[24px] font-semibold text-navy">
         Can't log in?{' '}
         <a href={op.tel} className="underline">
-          Call John: {op.phone}
+          Call Carnell: {op.phone}
         </a>
       </p>
       <p className="measure text-center text-lg text-charcoal/80">

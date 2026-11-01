@@ -16,7 +16,7 @@ export default function Messages() {
         id: Date.now(),
         client_id: client.id,
         from: client.full_name,
-        to: 'John',
+        to: 'Carnell',
         date: new Date().toISOString().slice(0, 10),
         text: draft.trim(),
       },

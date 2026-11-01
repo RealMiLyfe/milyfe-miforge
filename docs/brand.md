@@ -7,7 +7,7 @@
   INTERNAL only (admin + /system + docs). Never on client-facing screens.
 - **MiForge Founder Services** — the in-home tech service in Jacksonville, FL,
   built on that OS. Short name: **MiForge FS**. Domain: **miforgefs.milyfe.fun**.
-  Email: john@miforgefs.milyfe.fun. Phone everywhere: 904-562-0544 → `tel:9045620544`.
+  Email: carnell@miforgefs.milyfe.fun. Phone everywhere: 904-562-0544 → `tel:9045620544`.
   Client-facing screens show ONLY "MiForge Founder Services" + "part of the
   MiLyfe economy".
 
@@ -86,7 +86,7 @@ is a Go-Live item.
 DNS records for miforgefs.milyfe.fun · Cloudflare zone + scoped API token ·
 Cloudflare Pages projects (site, portal) · SSL Full(strict) + Caddy origin
 cert · Oracle VM public IP or Tunnel token · Backblaze B2 bucket + S3 keys ·
-SMTP credentials + `john@miforgefs.milyfe.fun` mailbox · SMS/voicemail
+SMTP credentials + `carnell@miforgefs.milyfe.fun` mailbox · SMS/voicemail
 forwarding for 904-562-0544 · payment handles (CashApp/Venmo/Zelle/check
 address) + Invoice Ninja production setup · LLC legal name/EIN · GL insurance
 certificate · background-check proof · Florida attorney review of `/trust` ·
@@ -97,9 +97,6 @@ public status page? · multi-operator admin · real-client migration (one at a
 time) · custom MiForge FS logo · production fonts (Lora/Inter) · remove DEMO
 banner strips.
 
-## Open question for the owner
+## Operator (locked 2026-11-01)
 
-Copy currently says "John" (from the Phase-3 spec: "Call John", john@ email,
-operator name in mock). The photo placeholder says **Carnell Lee**. Confirm
-whether operator-facing copy should read Carnell (one-line change in
-`meta.operator.name` + a handful of strings) or John stays.
+Operator name: **Carnell Lee** (phone 904-562-0544 → `tel:9045620544`). Email alias on miforgefs.milyfe.fun: `carnell@`. Prior "John" placeholder fully removed in commit `__HASH__` (`fix: replace placeholder "John" with operator name "Carnell Lee" across all surfaces`).

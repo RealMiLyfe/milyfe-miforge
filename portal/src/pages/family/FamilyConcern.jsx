@@ -9,12 +9,12 @@ export default function FamilyConcern() {
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-cream px-6 text-center text-[18px]">
       <p className="font-head text-5xl font-bold text-navy">How to Raise a Concern</p>
       <p className="measure text-2xl">
-        If something doesn't look right, call John directly.
+        If something doesn't look right, call Carnell directly.
       </p>
       <a href={op.tel} className="btn-rust w-full max-w-md">📞 {op.phone}</a>
       <p className="text-2xl">
         You can also email{' '}
-        <a href="mailto:john@miforgefs.milyfe.fun" className="font-semibold text-navy underline">john@miforgefs.milyfe.fun</a>
+        <a href="mailto:carnell@miforgefs.milyfe.fun" className="font-semibold text-navy underline">carnell@miforgefs.milyfe.fun</a>
       </p>
       <p className="measure text-xl text-charcoal/80">
         We take family concerns seriously. Every concern is logged and addressed within 24 hours.

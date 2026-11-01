@@ -83,7 +83,7 @@
         "toEmail": "={{ $json.email }}",
         "subject": "Checking in - {{ $json.full_name }}",
         "emailFormat": "text",
-        "text": "Hi {{ $json.full_name }},\n\nIt's been a couple of weeks since we last sat down together ({{ $json.last_visit_date }}). Everything still running smoothly?\n\nIf something has been bugging you - big or small - that's exactly what we're here for. A short check-in visit is easy to book.\n\n- The MiForge team"
+        "text": "Hi {{ $json.full_name }},\n\nIt's been a couple of weeks since we last sat down together ({{ $json.last_visit_date }}). Everything still running smoothly?\n\nIf something has been bugging you - big or small - that's exactly what we're here for. A short check-in visit is easy to book.\n\n- Carnell Lee\n\nMiForge Founder Services · 904-562-0544"
       },
       "id": "b5904dfc-d5a9-43a9-849a-c18f78fa4940",
       "name": "Send check-in email",

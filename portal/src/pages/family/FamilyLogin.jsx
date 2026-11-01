@@ -25,7 +25,7 @@ export default function FamilyLogin() {
       (x) => x.email.toLowerCase() === email.trim().toLowerCase()
     );
     if (p) loginAs(p);
-    else setErr("We couldn't find that email. Questions? Call John.");
+    else setErr("We couldn't find that email. Questions? Call Carnell.");
   };
 
   return (
@@ -34,7 +34,7 @@ export default function FamilyLogin() {
 
       <form onSubmit={submit} className="w-full max-w-md">
         <label htmlFor="femail" className="mb-2 block text-left text-2xl font-semibold text-navy">
-          Enter the email John gave you
+          Enter the email Carnell gave you
         </label>
         <input
           id="femail"
@@ -51,7 +51,7 @@ export default function FamilyLogin() {
 
       <p className="text-[24px] font-semibold text-navy">
         Questions?{' '}
-        <a href={op.tel} className="underline">Call John: {op.phone}</a>
+        <a href={op.tel} className="underline">Call Carnell: {op.phone}</a>
       </p>
 
       {/* dev demo personas */}

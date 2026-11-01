@@ -31,7 +31,7 @@ only): `miforge-admin`.
    with the phone number.)
 
 3. **Client home tiles** — http://localhost:5173 — 25s
-   Call John (`tel:`), Message Us (mock thread), My Tools, Next Visit (past
+   Call Carnell (`tel:`), Message Us (mock thread), My Tools, Next Visit (past
    visits with what was asked/done/left behind), **Share My Screen** → start →
    red "session active" screen → end → ended screen, Family Access →
    manage/add family members (verify, Full/Limited/Decision-Partner levels).
@@ -41,7 +41,7 @@ only): `miforge-admin`.
    Three demo personas. Log in as the **Decision Partner** → family home shows
    the pending **$450 project banner: Approve / Decline / Call** button. Try
    `?level=limited` → dates + summaries only. **/family/concern** → call /
-   email John page, 24-hour concern logging promise.
+   email Carnell page, 24-hour concern logging promise.
 
 5. **Operator admin** — http://localhost:5173/admin/login — 40s
    Password `miforge-admin` → **Dashboard**: date header, "3 visits today ·

@@ -20,9 +20,9 @@
       "parameters": {
         "fromEmail": "hello@miforge.local",
         "toEmail": "={{ $json.body.email }}",
-        "subject": "Welcome to MiForge, {{ $json.body.full_name }}!",
+        "subject": "Welcome to MiForge Founder Services, {{ $json.body.full_name }}!",
         "emailFormat": "text",
-        "text": "Hi {{ $json.body.full_name }},\n\nWelcome to MiForge! We're glad you found us via {{ $json.body.source }}.\n\nYour first visit is booked under the {{ $json.body.tier }} plan. When we arrive we'll agree on a flat price before we start, and we'll leave you a one-page cheat sheet.\n\nIf anything comes up before then, just reply to this email or call us.\n\n- The MiForge team"
+        "text": "Hi {{ $json.body.full_name }},\n\nWelcome to MiForge Founder Services! We're glad you found us via {{ $json.body.source }}.\n\nYour first visit is booked under the {{ $json.body.tier }} plan. When we arrive we'll agree on a flat price before we start, and we'll leave you a one-page cheat sheet.\n\nIf anything comes up before then, just reply to this email or call us.\n\n- Carnell Lee\n\nMiForge Founder Services · 904-562-0544"
       },
       "id": "791ba9cf-c8ff-4165-a83a-3e9ba3d74ec8",
       "name": "Send welcome email",

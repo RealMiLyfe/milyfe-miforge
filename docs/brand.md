@@ -99,4 +99,4 @@ banner strips.
 
 ## Operator (locked 2026-11-01)
 
-Operator name: **Carnell Lee** (phone 904-562-0544 → `tel:9045620544`). Email alias on miforgefs.milyfe.fun: `carnell@`. Prior "John" placeholder fully removed in commit `__HASH__` (`fix: replace placeholder "John" with operator name "Carnell Lee" across all surfaces`).
+Operator name: **Carnell Lee** (phone 904-562-0544 → `tel:9045620544`). Email alias on miforgefs.milyfe.fun: `carnell@`. Prior "John" placeholder fully removed in commit `4204634` (`fix: replace placeholder "John" with operator name "Carnell Lee" across all surfaces`).

@@ -1,0 +1,33 @@
+# demo-feedback.txt — collected during the agent's walkthrough of README-DEMO.md (2026-11-01)
+# Owner: run the demo yourself on laptop + phone (same wifi, laptop IP:5173) and APPEND below.
+# Don't fix one at a time — collect 10+, pick top 5, batch them.
+
+## Verified working in this pass (no action needed)
+- All routes 200 on :4321 (site) and :5173 (portal); DEMO banner on every page
+- Zero stray "John" (grep clean; only intentional historical note in docs/brand.md)
+- OG image, logo, favicon, icon-192/512, manifest, sw.js all serve 200 on both apps
+- 6 home tiles incl. "Call Carnell" (tel: one-tap), welcome overlay, offline simulate toggle
+- Family portal: 3 personas, $450 decision banner (Approve / Decline / Call Carnell First)
+- Admin: login (miforge-admin), dashboard, client profile tabs, session wizard w/
+  10-question ethical checkpoint + amber incomplete path, revenue/templates/settings
+- /system arch SVG, flow, memory, checklist render; manifest valid (3 icons, theme #1E3A6E)
+
+## Findings — batch later, top 5 first
+1. [medium] Admin session wizard keeps state in memory only — reloading mid-checkpoint
+   loses the whole draft; the "autosaved" indicator is simulated. Fix: persist draft to
+   localStorage keyed by visitId.
+2. [medium] Admin auth + family session are in-memory — refresh on /admin/* bounces to
+   /admin/login. Fine for a demo; decide before Go-Live (sessionStorage at minimum).
+3. [low] PWA service worker registers only in PROD builds (main.jsx) — Add to Home Screen
+   won't prompt from `npm run dev`; test with `npm run build && npx vite preview`.
+4. [low] og-image.png is 682 KB — optimize (palette/JPEG q85) before Go-Live.
+5. [low] Marketing-site flag placeholders show raw dev text (`flag <code>...: OFF`) —
+   intentional for demo honesty, but decide what prospects should see at Go-Live.
+6. [info] Phone checks pending on owner's device: 375 px tiles readable? "Call Carnell"
+   obvious? one-tap dial? rotate mid-flow? (CSS: 22 px base, tiles min 200x200, tel: link.)
+7. [info] Back button mid-flow = plain route back; no state loss beyond items 1-2.
+8. [info] AdminSession timer (setInterval) — check cleanup on unmount; cosmetic only.
+9. [info] n8n emails now sign "Carnell Lee / MiForge Founder Services · 904-562-0544";
+   fromEmail is still hello@miforge.local (dev) — switch to carnell@miforgefs... at Go-Live.
+10. [info] README-DEMO.md assumes a fresh browser — the welcome overlay appears once
+    (localStorage); clear it to re-see it while demoing.

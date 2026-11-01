@@ -14,6 +14,7 @@ import Family from './pages/Family.jsx';
 import FamilyAdd from './pages/FamilyAdd.jsx';
 import Account from './pages/Account.jsx';
 import OfflineScreen from './components/OfflineScreen.jsx';
+import DemoBanner from './components/DemoBanner.jsx';
 
 // ---- Phase 3: operator admin ----
 import AdminLogin from './pages/admin/AdminLogin.jsx';
@@ -69,6 +70,7 @@ export default function App() {
     <OnlineContext.Provider value={{ offline, setOffline }}>
       <StoreProvider>
         <BrowserRouter>
+          <DemoBanner />
           {offline ? (
             <OfflineScreen />
           ) : (

@@ -50,6 +50,8 @@ export default function AdminSettings() {
             <div><dt className="inline font-bold">Brand name: </dt><dd className="inline">{b.name}</dd></div>
             <div><dt className="inline font-bold">Phone: </dt><dd className="inline">{b.phone}</dd></div>
             <div><dt className="inline font-bold">Domain: </dt><dd className="inline">{b.domain}</dd></div>
+            {b.service_area && <div><dt className="inline font-bold">Service area: </dt><dd className="inline">{b.service_area}</dd></div>}
+            {b.hours && <div><dt className="inline font-bold">Hours: </dt><dd className="inline">{b.hours}</dd></div>}
             <div>
               <dt className="inline font-bold">Colors: </dt>
               <dd className="inline-flex gap-2">

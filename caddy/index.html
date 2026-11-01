@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MiForge OS - local stack</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; background: #0f172a; color: #e2e8f0; }
+    h1 { color: #38bdf8; }
+    table { border-collapse: collapse; width: 100%; }
+    td, th { border-bottom: 1px solid #334155; padding: 8px; text-align: left; }
+    a { color: #38bdf8; }
+    code { background: #1e293b; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>MiForge OS - local dev stack</h1>
+  <p>Everything runs on this laptop via Docker Compose. No cloud, no external DNS.</p>
+  <table>
+    <tr><th>App</th><th>Open</th><th>Notes</th></tr>
+    <tr><td>Nextcloud (files)</td><td><a href="/files/">localhost/files</a></td><td>direct: <a href="http://localhost:8081/files">localhost:8081/files</a> - admin / miforge-dev-2025</td></tr>
+    <tr><td>ntfy (notify)</td><td><a href="/notify/">localhost/notify</a></td><td>CLI: <code>curl -d hi localhost:8089/miforge</code></td></tr>
+    <tr><td>NocoDB (CRM)</td><td><a href="http://localhost:8080">localhost:8080</a></td><td>sign up on first open</td></tr>
+    <tr><td>Vaultwarden (vault)</td><td><a href="http://localhost:8082">localhost:8082</a></td><td>admin panel: <a href="http://localhost:8082/admin">/admin</a></td></tr>
+    <tr><td>Invoice Ninja (invoice)</td><td><a href="http://localhost:8083">localhost:8083</a></td><td>admin@miforge.local / miforge-dev-2025</td></tr>
+    <tr><td>n8n (flow)</td><td><a href="http://localhost:5678">localhost:5678</a></td><td>3 workflows pre-imported</td></tr>
+    <tr><td>Uptime Kuma (status)</td><td><a href="http://localhost:3001">localhost:3001</a></td><td>admin / miforge-dev-2025</td></tr>
+    <tr><td>Chatwoot (chat)</td><td><a href="http://localhost:8084">localhost:8084</a></td><td>app at /app</td></tr>
+    <tr><td>Formbricks (forms)</td><td><a href="http://localhost:3002">localhost:3002</a></td><td>sign up on first open</td></tr>
+  </table>
+  <p>See <code>README-LOCAL.md</code> for the full guide.</p>
+</body>
+</html>

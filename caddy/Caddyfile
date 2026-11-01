@@ -1,0 +1,37 @@
+# ============================================================================
+# MiForge local reverse proxy.
+#
+# Front door:  http://localhost        (landing page with all app links)
+#              https://localhost       (works too - Caddy uses a local CA;
+#                                         run `docker compose exec caddy caddy trust`
+#                                         once to silence the browser warning)
+#
+# Path-based routes (apps that support sub-paths natively):
+#   /files/*   -> Nextcloud   (overwritewebroot=/files is set in Nextcloud)
+#   /notify/*  -> ntfy        (ntfy runs with --base-url /notify)
+#
+# All other apps are PORT-based on purpose (NocoDB, Vaultwarden, Invoice
+# Ninja, n8n, Uptime Kuma, Chatwoot, Formbricks build absolute URLs and break
+# behind a stripped prefix) - see the port table in README-LOCAL.md.
+# ============================================================================
+{
+	local_certs
+}
+
+localhost {
+	tls internal
+
+	# Nextcloud under /files - do NOT strip the prefix; Nextcloud itself
+	# expects requests to arrive as /files/... (overwritewebroot).
+	redir /files /files/
+	reverse_proxy /files/* nextcloud:80
+
+	# ntfy under /notify - do NOT strip the prefix; ntfy is started with
+	# --base-url /notify so it generates correct links itself.
+	redir /notify /notify/
+	reverse_proxy /notify/* ntfy:80
+
+	# Landing page listing every app URL.
+	root * /srv
+	file_server
+}

@@ -1,0 +1,591 @@
+# ============================================================================
+# MiForge OS - local development stack (Docker Compose, laptop only)
+#
+#  * No cloud: no Oracle, no Cloudflare Pages, no Backblaze, no external DNS.
+#  * Caddy fronts http://localhost (80/443). Apps that support sub-path
+#    routing are routed by path (/files, /notify); the rest get dedicated
+#    localhost ports - see the port table in README-LOCAL.md for why.
+#  * Every image is PINNED (no :latest) and multi-arch (linux/amd64+arm64).
+#  * Steady-state memory limits total ~5.3 GB of the 8 GB budget.
+#  * Telemetry is disabled explicitly where the app supports it.
+#
+# Run:  cp .env.example .env && docker compose up -d
+# ============================================================================
+name: miforge
+
+networks:
+  miforge:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:
+  postgres_data:
+  mariadb_data:
+  redis_data:
+  nocodb_data:
+  nextcloud_data:
+  vaultwarden_data:
+  ninja_storage:
+  kuma_data:
+  n8n_data:
+  ntfy_cache:
+  chatwoot_storage:
+  backups:
+
+services:
+  # ------------------------------------------------------------- Caddy -----
+  # Reverse proxy / front door. Serves the landing page at / and routes:
+  #   localhost/files  -> nextcloud   (Nextcloud supports sub-path natively)
+  #   localhost/notify -> ntfy        (ntfy started with --base-url /notify)
+  caddy:
+    image: caddy:2.11.7-alpine            # multi-arch, pinned
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./caddy/index.html:/srv/index.html:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks: [miforge]
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+  # ----------------------------------------------------------- Postgres -----
+  # Postgres 16 (+ pgvector, needed by Formbricks). Shared by NocoDB,
+  # Nextcloud, n8n, Formbricks and Chatwoot. Databases are pre-created by
+  # db-init/01-create-dbs.sh.
+  postgres:
+    image: pgvector/pgvector:0.8.7-pg16   # Postgres 16 + pgvector, multi-arch, pinned
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db-init/01-create-dbs.sh:/docker-entrypoint-initdb.d/01-create-dbs.sh:ro
+    ports:
+      - "127.0.0.1:5432:5432"             # laptop-only, for psql / DBeaver
+    networks: [miforge]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+
+  # ------------------------------------------------------------ MariaDB -----
+  # MariaDB 11, for Invoice Ninja only. DB `ninja` pre-created by
+  # db-init/mariadb/01-create-dbs.sql.
+  mariadb:
+    image: mariadb:11.4.3                 # multi-arch, pinned
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ninja
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./db-init/mariadb/01-create-dbs.sql:/docker-entrypoint-initdb.d/01-create-dbs.sql:ro
+    ports:
+      - "127.0.0.1:3306:3306"             # laptop-only
+    networks: [miforge]
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h 127.0.0.1 -u root -p$${MARIADB_ROOT_PASSWORD} --silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  # -------------------------------------------------------------- Redis -----
+  # Shared cache/ActionCable for Chatwoot. Internal only (no host port).
+  redis:
+    image: redis:8.10.3                   # multi-arch, pinned
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    networks: [miforge]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+  # ------------------------------------------------------------- NocoDB -----
+  # The CRM. PORT-BASED (http://localhost:8080), not localhost/crm:
+  # NocoDB builds absolute URLs from NC_PUBLIC_URL and its assets/websockets
+  # break behind a stripped path prefix in current versions.
+  # First boot: sign up at http://localhost:8080 to create the owner account.
+  # The 7 MiForge tables + sample data are seeded into Postgres by `seeder`.
+  nocodb:
+    image: nocodb/nocodb:2026.06.1        # multi-arch, pinned
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      NC_DB: pg://postgres:5432?u=${POSTGRES_USER}&p=${POSTGRES_PASSWORD}&d=nocodb
+      NC_PUBLIC_URL: http://localhost:8080
+      NC_TELEMETRY_DISABLE: "true"        # no telemetry
+    volumes:
+      - nocodb_data:/usr/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [miforge]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/dashboard >/dev/null 2>&1 || wget -qO- http://localhost:8080/ >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  # ----------------------------------------------------------- Nextcloud ----
+  # File storage. PATH-BASED at http://localhost/files (Nextcloud supports a
+  # sub-path natively via overwritewebroot=/files, set in
+  # nextcloud/config/zz-miforge.config.php). Direct port also exposed:
+  # http://localhost:8081/files
+  nextcloud:
+    image: nextcloud:2026.6.2-apache      # multi-arch, pinned
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: nextcloud
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      NEXTCLOUD_ADMIN_USER: ${NEXTCLOUD_ADMIN_USER}
+      NEXTCLOUD_ADMIN_PASSWORD: ${NEXTCLOUD_ADMIN_PASSWORD}
+      NEXTCLOUD_TRUSTED_DOMAINS: localhost 127.0.0.1
+      OVERWRITEWEBROOT: /files
+      OVERWRITEHOST: localhost
+      OVERWRITECLIURL: http://localhost/files
+      OVERWRITEPROTOCOL: http
+    volumes:
+      - nextcloud_data:/var/www/html
+      - ./nextcloud/config/zz-miforge.config.php:/var/www/html/config/zz-miforge.config.php:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [miforge]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost/files/login >/dev/null 2>&1 || curl -fsS http://localhost/ >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 90s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  # -------------------------------------------------------- Vaultwarden -----
+  # Password vault. PORT-BASED (http://localhost:8082): it serves websockets
+  # and absolute /api/* paths, so a sub-path prefix breaks it.
+  # Signups disabled; admin panel at http://localhost:8082/admin
+  vaultwarden:
+    image: vaultwarden/server:1.37.4-alpine   # multi-arch, pinned
+    restart: unless-stopped
+    ports:
+      - "8082:80"
+    environment:
+      DOMAIN: http://localhost:8082
+      SIGNUPS_ALLOWED: "false"
+      INVITATIONS_ALLOWED: "true"           # admin invites people via /admin
+      ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN}
+      LOG_FILE: /data/vaultwarden.log
+    volumes:
+      - vaultwarden_data:/data
+    networks: [miforge]
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost/alive >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+  # ----------------------------------------------------- Invoice Ninja -----
+  # Invoicing. PORT-BASED (http://localhost:8083): Laravel generates absolute
+  # redirect/asset URLs, so a sub-path prefix breaks logins and PDF links.
+  # Pre-configured (company "MiForge", USD, 6 payment methods, 3 invoices)
+  # by the `ninja-setup` one-shot after first boot.
+  ninja:
+    image: invoiceninja/invoiceninja:v5.13.52  # multi-arch, pinned
+    restart: unless-stopped
+    ports:
+      - "8083:80"
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_URL: http://localhost:8083
+      APP_KEY: ${IN_APP_KEY}
+      DB_HOST: mariadb
+      DB_PORT: "3306"
+      DB_DATABASE: ninja
+      DB_USERNAME: ${MARIADB_USER}
+      DB_PASSWORD: ${MARIADB_PASSWORD}
+      MAIL_MAILER: log                      # nothing leaves the laptop
+      QUEUE_CONNECTION: database
+      SESSION_SECURE_COOKIE: "false"
+      TRUSTED_PROXIES: "*"
+    volumes:
+      - ninja_storage:/var/www/app/storage
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks: [miforge]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost/ >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 40
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  # ------------------------------------------------------- Uptime Kuma -----
+  # Monitoring. PORT-BASED (http://localhost:3001): its socket.io endpoint is
+  # hardcoded at /socket.io, which breaks behind a sub-path.
+  # Monitors for every other service are pre-added by `kuma-setup`.
+  kuma:
+    image: louislam/uptime-kuma:1.23.17   # multi-arch, pinned
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - kuma_data:/app/data
+    networks: [miforge]
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"require('http').get('http://127.0.0.1:3001',r=>process.exit(r.statusCode<500?0:1)).on('error',()=>process.exit(1))\""]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  # ---------------------------------------------------------------- n8n -----
+  # Automation. PORT-BASED (http://localhost:5678): the editor and webhook
+  # URLs are root-based, so a sub-path prefix breaks them.
+  # 3 workflows are pre-imported by `n8n-import` from n8n/workflows/.
+  n8n:
+    image: n8nio/n8n:2.46.3               # multi-arch, pinned
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      N8N_HOST: localhost
+      N8N_PORT: "5678"
+      N8N_PROTOCOL: http
+      WEBHOOK_URL: http://localhost:5678/
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+      N8N_SECURE_COOKIE: "false"
+      N8N_PROXY_HOPS: "1"
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: "5432"
+      DB_POSTGRESDB_DATABASE: n8n
+      DB_POSTGRESDB_USER: ${POSTGRES_USER}
+      DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD}
+      GENERIC_TIMEZONE: America/New_York
+      # telemetry / nags off
+      N8N_DIAGNOSTICS_ENABLED: "false"
+      N8N_VERSION_NOTIFICATIONS_ENABLED: "false"
+      N8N_TEMPLATES_ENABLED: "false"
+      N8N_ONBOARDING_FLOW_DISABLED: "true"
+      N8N_PERSONALIZATION_ENABLED: "false"
+      N8N_HIRING_BANNER_ENABLED: "false"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [miforge]
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:5678/healthz >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  # ---------------------------------------------------------------- ntfy -----
+  # Push notifications. PATH-BASED at http://localhost/notify (ntfy is started
+  # with --base-url /notify, so the web UI and pub/sub both work under the
+  # prefix). Direct port 8089 is also exposed and is the reliable endpoint
+  # for CLI publishing:  curl -d "hi" http://localhost:8089/miforge
+  # No auth (local dev only - do not expose beyond localhost).
+  ntfy:
+    image: binwiederhier/ntfy:v2.36.0     # multi-arch, pinned
+    restart: unless-stopped
+    ports:
+      - "8089:80"
+    command: ["serve", "--base-url", "/notify", "--cache-file", "/data/cache.db"]
+    volumes:
+      - ntfy_cache:/data
+    networks: [miforge]
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost/ >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    deploy:
+      resources:
+        limits:
+          memory: 64M
+
+  # ------------------------------------------------------------- Chatwoot ---
+  # Live chat. PORT-BASED (http://localhost:8084): Rails serves absolute
+  # asset and ActionCable (/cable) paths, so a sub-path prefix breaks it.
+  # Uses the shared Postgres (db `chatwoot`) + Redis.
+  chatwoot:
+    image: chatwoot/chatwoot:v4.19.1      # multi-arch, pinned
+    restart: unless-stopped
+    ports:
+      - "8084:3000"
+    environment:
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: "true"
+      RAILS_SERVE_STATIC_FILES: "true"
+      RAILS_MAX_THREADS: "2"
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_DATABASE: chatwoot
+      POSTGRES_USERNAME: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      REDIS_URL: redis://redis:6379/1
+      SECRET_KEY_BASE: ${CHATWOOT_SECRET_KEY_BASE}
+      FRONTEND_URL: http://localhost:8084
+      INSTALLATION_ENV: docker
+    volumes:
+      - chatwoot_storage:/app/storage
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks: [miforge]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:3000/ >/dev/null 2>&1 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 40
+      start_period: 180s
+    deploy:
+      resources:
+        limits:
+          memory: 768M
+
+  # ------------------------------------------------------------ Formbricks --
+  # Forms/surveys. PORT-BASED (http://localhost:3002): its Next.js router is
+  # root-based, so a sub-path prefix breaks it. Uses shared Postgres (db
+  # `formbricks`, pgvector extension pre-created).
+  formbricks:
+    image: formbricks/formbricks:v3.17.1  # multi-arch, pinned
+    restart: unless-stopped
+    ports:
+      - "3002:3000"
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/formbricks
+      NEXTAUTH_URL: http://localhost:3002
+      NEXTAUTH_SECRET: ${FORMBRICKS_NEXTAUTH_SECRET}
+      ENCRYPTION_KEY: ${FORMBRICKS_ENCRYPTION_KEY}
+      NEXT_PUBLIC_WEBAPP_URL: http://localhost:3002
+      TELEMETRY_DISABLED: "1"               # no telemetry
+      NEXT_PUBLIC_TELEMETRY_DISABLED: "1"
+      PORT: "3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [miforge]
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/ >/dev/null 2>&1 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 30
+      start_period: 90s
+    deploy:
+      resources:
+        limits:
+          memory: 384M
+
+  # -------------------------------------------------------------- backup ----
+  # Mock backup cron (local dev): logs "backup complete" once a day.
+  # Real deployments replace this with restic/kopia to Backblaze B2.
+  backup:
+    image: alpine:3.20.3                  # multi-arch, pinned
+    restart: unless-stopped
+    volumes:
+      - ./backup/backup.sh:/backup.sh:ro
+      - backups:/backups
+    command: ["/bin/sh", "/backup.sh"]
+    networks: [miforge]
+    deploy:
+      resources:
+        limits:
+          memory: 32M
+
+  # ============================ one-shot setup jobs =========================
+  # These run once on `docker compose up` and exit (restart: "no").
+
+  # Seeds the NocoDB CRM schema + sample data into Postgres db `nocodb`.
+  seeder:
+    image: pgvector/pgvector:0.8.7-pg16
+    restart: "no"
+    environment:
+      PGHOST: postgres
+      PGUSER: ${POSTGRES_USER}
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./nocodb/seed.sql:/seed/seed.sql:ro
+    command: >
+      sh -c "until pg_isready -h postgres -U $${POSTGRES_USER}; do sleep 2; done;
+             psql -h postgres -U $${POSTGRES_USER} -d nocodb -v ON_ERROR_STOP=1 -f /seed/seed.sql"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [miforge]
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+  # Pre-creates the clients/ folder tree in Nextcloud via WebDAV.
+  nextcloud-init:
+    image: nextcloud:2026.6.2-apache
+    restart: "no"
+    entrypoint: ["/bin/sh", "/init.sh"]
+    environment:
+      NC_URL: http://nextcloud
+      NC_USER: ${NEXTCLOUD_ADMIN_USER}
+      NC_PASS: ${NEXTCLOUD_ADMIN_PASSWORD}
+    volumes:
+      - ./nextcloud/init.sh:/init.sh:ro
+    depends_on:
+      nextcloud:
+        condition: service_started
+    networks: [miforge]
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+  # Pre-adds Uptime Kuma monitors for every service (Kuma has no config-file
+  # import, so we drive its socket.io API once).
+  kuma-setup:
+    image: node:22.11.0-alpine
+    restart: "no"
+    working_dir: /app
+    environment:
+      KUMA_URL: http://kuma:3001
+      KUMA_ADMIN_USER: ${KUMA_ADMIN_USER}
+      KUMA_ADMIN_PASSWORD: ${KUMA_ADMIN_PASSWORD}
+    volumes:
+      - ./uptime-kuma:/app
+    command: ["sh", "-c", "npm install --omit=dev --no-audit --no-fund && node add-monitors.mjs"]
+    depends_on:
+      kuma:
+        condition: service_started
+    networks: [miforge]
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+  # Pre-imports the 3 sample n8n workflows.
+  n8n-import:
+    image: n8nio/n8n:2.46.3
+    restart: "no"
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      n8n import:workflow --input=/workflows/01-new-client-welcome.json &&
+      n8n import:workflow --input=/workflows/02-48-hour-follow-up.json &&
+      n8n import:workflow --input=/workflows/03-14-day-check-in.json &&
+      echo "n8n workflows imported"
+    environment:
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: "5432"
+      DB_POSTGRESDB_DATABASE: n8n
+      DB_POSTGRESDB_USER: ${POSTGRES_USER}
+      DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./n8n/workflows:/workflows:ro
+    depends_on:
+      n8n:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    networks: [miforge]
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  # Pre-configures Invoice Ninja (company, payment methods, sample invoices).
+  # Requires the first-run setup at http://localhost:8083 to be completed once.
+  ninja-setup:
+    image: invoiceninja/invoiceninja:v5.13.52
+    restart: "no"
+    working_dir: /var/www/app
+    environment:
+      APP_ENV: production
+      APP_URL: http://localhost:8083
+      APP_KEY: ${IN_APP_KEY}
+      DB_HOST: mariadb
+      DB_PORT: "3306"
+      DB_DATABASE: ninja
+      DB_USERNAME: ${MARIADB_USER}
+      DB_PASSWORD: ${MARIADB_PASSWORD}
+      QUEUE_CONNECTION: database
+    volumes:
+      - ./invoice-ninja/setup.php:/setup/setup.php:ro
+      - ninja_storage:/var/www/app/storage
+    command: >
+      sh -c "i=0; until php /setup/setup.php; do i=$$((i+1));
+             if [ $$i -gt 24 ]; then echo 'ninja-setup: giving up - complete first-run setup at http://localhost:8083 then run: docker compose up --force-recreate ninja-setup'; exit 1; fi;
+             echo 'ninja not ready yet, retrying...'; sleep 10; done;
+             echo 'ninja-setup complete'"
+    depends_on:
+      ninja:
+        condition: service_started
+      mariadb:
+        condition: service_healthy
+    networks: [miforge]
+    deploy:
+      resources:
+        limits:
+          memory: 256M

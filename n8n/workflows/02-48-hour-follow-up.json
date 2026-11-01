@@ -1,0 +1,152 @@
+{
+  "name": "MiForge - 48-Hour Follow-Up",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            { "field": "cronExpression", "expression": "0 10 * * *" }
+          ]
+        }
+      },
+      "id": "9d1b2886-371f-4ac4-8872-071c358ef7c2",
+      "name": "Every day at 10:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "clientsTableId",
+              "value": "REPLACE_WITH_CLIENTS_TABLE_ID",
+              "type": "string"
+            },
+            {
+              "name": "nocodbToken",
+              "value": "REPLACE_WITH_NOCODB_API_TOKEN",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "aecddf6b-70f0-4be6-9862-1a25bae8b95f",
+      "name": "Set table IDs",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [440, 300],
+      "notes": "Get the Clients table id from NocoDB (table URL / API docs) and create a NocoDB API token (Team & Settings > API Tokens)."
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=http://nocodb:8080/api/v2/tables/{{ $('Set table IDs').item.json.clientsTableId }}/records?limit=200",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "xc-token", "value": "={{ $('Set table IDs').item.json.nocodbToken }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2ed0e5bd-86ab-4a22-b849-8e6b47939788",
+      "name": "Get active clients from NocoDB",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {},
+          "conditions": [
+            {
+              "leftValue": "=DateTime.now().diff(DateTime.fromISO($json.last_visit_date), 'days').days",
+              "operator": { "type": "number", "operation": "gte" },
+              "rightValue": 2
+            },
+            {
+              "leftValue": "=DateTime.now().diff(DateTime.fromISO($json.last_visit_date), 'days').days",
+              "operator": { "type": "number", "operation": "lt" },
+              "rightValue": 3
+            }
+          ]
+        }
+      },
+      "id": "69f4f4ea-85bc-4a8e-ade9-867b8119171b",
+      "name": "Visited 2 days ago",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [880, 300],
+      "notes": "Fires once per visit: last visit was 2 days ago (not 3+), so each visit gets exactly one follow-up."
+    },
+    {
+      "parameters": {
+        "fromEmail": "hello@miforge.local",
+        "toEmail": "={{ $json.email }}",
+        "subject": "How did the visit go, {{ $json.full_name }}?",
+        "emailFormat": "text",
+        "text": "Hi {{ $json.full_name }},\n\nIt's been a couple of days since our visit on {{ $json.last_visit_date }} - we hope everything is working the way you want.\n\nIf anything felt confusing, reply and we'll walk through it again. And remember: your cheat sheet is taped to the monitor.\n\n- The MiForge team"
+      },
+      "id": "2430942f-5d50-4961-9df9-e2512ee612be",
+      "name": "Send follow-up email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1100, 300],
+      "credentials": {
+        "smtp": {
+          "id": "miforge-dev-smtp-mock",
+          "name": "MiForge Dev SMTP (mock)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://ntfy:80/miforge-followups",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Title", "value": "MiForge: 48h follow-up sent" }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "body", "value": "=48-hour follow-up sent to {{ $json.full_name }} ({{ $json.email }}), last visit {{ $json.last_visit_date }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "bca99af9-7c8c-4835-8ae2-a96a71442bec",
+      "name": "Notify via ntfy",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1320, 300]
+    }
+  ],
+  "connections": {
+    "Every day at 10:00": {
+      "main": [[{ "node": "Set table IDs", "type": "main", "index": 0 }]]
+    },
+    "Set table IDs": {
+      "main": [[{ "node": "Get active clients from NocoDB", "type": "main", "index": 0 }]]
+    },
+    "Get active clients from NocoDB": {
+      "main": [[{ "node": "Visited 2 days ago", "type": "main", "index": 0 }]]
+    },
+    "Visited 2 days ago": {
+      "main": [[{ "node": "Send follow-up email", "type": "main", "index": 0 }]]
+    },
+    "Send follow-up email": {
+      "main": [[{ "node": "Notify via ntfy", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "staticData": null,
+  "tags": []
+}

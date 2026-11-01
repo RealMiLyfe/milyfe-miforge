@@ -1,0 +1,10 @@
+{
+  "name": "miforge-kuma-setup",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "One-shot: pre-adds Uptime Kuma monitors for every MiForge service via Kuma's socket.io API.",
+  "dependencies": {
+    "socket.io-client": "4.8.1"
+  }
+}

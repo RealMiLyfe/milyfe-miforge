@@ -1,0 +1,146 @@
+{
+  "name": "MiForge - 14-Day Check-In",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            { "field": "cronExpression", "expression": "0 9 * * 1" }
+          ]
+        }
+      },
+      "id": "c1b0b3b4-c3d8-4726-82d5-4ddf50fa8775",
+      "name": "Every Monday at 09:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "clientsTableId",
+              "value": "REPLACE_WITH_CLIENTS_TABLE_ID",
+              "type": "string"
+            },
+            {
+              "name": "nocodbToken",
+              "value": "REPLACE_WITH_NOCODB_API_TOKEN",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a4b33eba-b6a0-43f1-bc49-26f5d92122bb",
+      "name": "Set table IDs",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [440, 300],
+      "notes": "Same values as the 48-hour follow-up workflow: Clients table id + a NocoDB API token."
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=http://nocodb:8080/api/v2/tables/{{ $('Set table IDs').item.json.clientsTableId }}/records?limit=200&where=(status,eq,Active)",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "xc-token", "value": "={{ $('Set table IDs').item.json.nocodbToken }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2a3035d6-537d-416d-b381-6892f1938449",
+      "name": "Get active clients from NocoDB",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {},
+          "conditions": [
+            {
+              "leftValue": "=DateTime.now().diff(DateTime.fromISO($json.last_visit_date), 'days').days",
+              "operator": { "type": "number", "operation": "gte" },
+              "rightValue": 14
+            }
+          ]
+        }
+      },
+      "id": "359783a0-ffa6-45fd-a13c-86949b5d19de",
+      "name": "No visit in 14+ days",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [880, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "hello@miforge.local",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Checking in - {{ $json.full_name }}",
+        "emailFormat": "text",
+        "text": "Hi {{ $json.full_name }},\n\nIt's been a couple of weeks since we last sat down together ({{ $json.last_visit_date }}). Everything still running smoothly?\n\nIf something has been bugging you - big or small - that's exactly what we're here for. A short check-in visit is easy to book.\n\n- The MiForge team"
+      },
+      "id": "b5904dfc-d5a9-43a9-849a-c18f78fa4940",
+      "name": "Send check-in email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1100, 300],
+      "credentials": {
+        "smtp": {
+          "id": "miforge-dev-smtp-mock",
+          "name": "MiForge Dev SMTP (mock)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://ntfy:80/miforge-followups",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Title", "value": "MiForge: 14-day check-in sent" }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "body", "value": "=14-day check-in sent to {{ $json.full_name }} ({{ $json.email }}), last visit {{ $json.last_visit_date }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a79fc285-febf-4ff9-aacb-65e7960d0f21",
+      "name": "Notify via ntfy",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1320, 300]
+    }
+  ],
+  "connections": {
+    "Every Monday at 09:00": {
+      "main": [[{ "node": "Set table IDs", "type": "main", "index": 0 }]]
+    },
+    "Set table IDs": {
+      "main": [[{ "node": "Get active clients from NocoDB", "type": "main", "index": 0 }]]
+    },
+    "Get active clients from NocoDB": {
+      "main": [[{ "node": "No visit in 14+ days", "type": "main", "index": 0 }]]
+    },
+    "No visit in 14+ days": {
+      "main": [[{ "node": "Send check-in email", "type": "main", "index": 0 }]]
+    },
+    "Send check-in email": {
+      "main": [[{ "node": "Notify via ntfy", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "staticData": null,
+  "tags": []
+}

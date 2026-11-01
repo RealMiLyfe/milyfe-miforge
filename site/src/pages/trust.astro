@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const sections = [
+  {
+    h: '1. What we collect',
+    p: "When you work with MiForge, we write down your name, phone number, address, and email. We also keep notes about each visit — what we did, what you paid, and anything you asked us to remember. If you let family members see your account, we record their names and phone numbers too. That's all we collect. We don't track you around the internet, and we don't sell your information to anyone, ever.",
+  },
+  {
+    h: '2. How we store it',
+    p: "Your information lives on secure, password-protected systems that only MiForge can open. Paper notes (like a signed consent form) are kept in a locked folder. We keep your information only as long as you're a client, plus whatever Florida law requires us to keep for taxes.",
+  },
+  {
+    h: '3. Who can see it',
+    p: "Only John (the operator) sees your information by default. If you add family members in your portal, each one sees only the level you choose: Full View, Limited View, or Decision Partner. You can change or remove anyone at any time, and we'll tell you when we do.",
+  },
+  {
+    h: '4. Family access',
+    p: "Family Access is always your choice. You can invite family, change what they can see, or remove them completely. A Decision Partner is someone we check with before any project over $300 or any ongoing monthly work — you stay in charge, we just make sure they agree too.",
+  },
+  {
+    h: '5. Screen sharing',
+    p: "When you turn on Share My Screen in your portal, John can see your screen and move your mouse — only while you're sharing, and only to help with the problem at hand. When you turn it off, the connection stops. John will never open your banking, email passwords, or other private accounts unless you ask him to and you watch him do it. If you ever want the connection gone completely, close the RustDesk app on your computer too.",
+  },
+  {
+    h: '6. Your right to delete',
+    p: "You can ask us to delete your information at any time. In your portal, use 'Delete my account and data.' We'll send the request to John, he'll call you to confirm it's really you, and then we delete your records. Some basic payment records may be kept only as long as tax law requires.",
+  },
+  {
+    h: '7. Our promise not to share',
+    p: "We do not sell, rent, trade, or give your information to advertisers, data brokers, or anyone else. The only times we could share it: if the law requires it (for example, a court order), or to protect someone from serious harm. If that ever happens, we'll tell you unless the law forbids it.",
+  },
+  {
+    h: '8. How to reach us',
+    p: "Call or text John at 904-562-0544, any day between 8am and 8pm. You can also use the Message Us button in your client portal. We answer every message within 24 hours.",
+  },
+  {
+    h: '9. How to file a complaint',
+    p: "If you're unhappy with how we handled your information, call or text 904-562-0544 and say so — we'll fix it. You can also file a complaint with the Florida Attorney General's office (Consumer Protection) at myfloridalegal.com or 1-866-9-NO-SCAM.",
+  },
+  {
+    h: '10. Effective date',
+    p: "This agreement takes effect on the day you sign it or first use the client portal, whichever comes first. We may update it; if we do, we'll give you the new version and ask you to agree again. Current version: October 2026.",
+  },
+];
+---
+
+<Layout title="Privacy & Trust Agreement">
+  <div class="bg-warn px-4 py-3 text-center font-bold text-cream">
+    DRAFT — Have a Florida attorney review before client use.
+  </div>
+
+  <article class="mx-auto max-w-measure px-4 py-12">
+    <h1 class="text-4xl md:text-5xl">Our Privacy &amp; Trust Agreement</h1>
+    <p class="mt-6 text-xl">
+      This is our promise to you, written in plain English. If anything here is unclear, call
+      John at <a href="tel:9045620544" class="font-semibold text-navy underline">904-562-0544</a> and he'll
+      explain it.
+    </p>
+
+    {
+      sections.map((s) => (
+        <section class="mt-10">
+          <h2 class="text-3xl">{s.h}</h2>
+          <p class="measure mt-3 text-xl">{s.p}</p>
+        </section>
+      ))
+    }
+
+    <div class="mt-12">
+      <button id="print-btn" class="btn-navy-outline text-xl">Print this page</button>
+    </div>
+
+    <script>
+      document.getElementById('print-btn')?.addEventListener('click', () => window.print());
+    </script>
+  </article>
+</Layout>

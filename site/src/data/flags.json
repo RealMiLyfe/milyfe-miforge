@@ -1,0 +1,7 @@
+{
+  "_comment": "Feature flags for trust-section claims. Anything OFF renders as a grey dashed 'HIDDEN - flag OFF' placeholder card. Turn a flag ON only when true.",
+  "background_checked": false,
+  "insured": false,
+  "testimonials": false,
+  "testimonial_note": "Awaiting Bruce's written permission"
+}

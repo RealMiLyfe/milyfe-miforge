@@ -1,0 +1,258 @@
+{
+  "_comment": "Mock data only - no backend integration yet. Mirrors the NocoDB schema seeded by nocodb/seed.sql (Phase 1). Client records are identical to the seeded sample data (Bruce C-001, Margaret C-002, Robert & Diane C-003). The portal defaults to Bruce's view (meta.default_client_id = 1).",
+  "meta": {
+    "seeded_from": "nocodb/seed.sql",
+    "default_client_id": 1,
+    "operator": { "name": "John", "phone": "904-562-0544", "tel": "tel:9045620544" }
+  },
+  "clients": [
+    {
+      "id": 1,
+      "client_number": "C-001",
+      "full_name": "Bruce",
+      "age": 74,
+      "descriptor": "Preacher",
+      "source": "Craigslist",
+      "status": "Completed",
+      "tier": "Session",
+      "phone": "904-555-0141",
+      "email": "bruce@example.com",
+      "address": "Riverside, Jacksonville, FL",
+      "devices": "Desktop (Windows 10), Android phone",
+      "tech_comfort": "Medium",
+      "payment_terms": "One-time session, $150 cash paid at the visit",
+      "monthly_amount": null,
+      "referred_by": null,
+      "last_visit_date": "2025-12-16",
+      "notes": "3-hour visit building a book inventory system with Arena AI + Google Sheets. Left a printed index of his sermon archive and a cheat sheet."
+    },
+    {
+      "id": 2,
+      "client_number": "C-002",
+      "full_name": "Margaret",
+      "age": 81,
+      "descriptor": "Widow",
+      "source": "Church referral",
+      "status": "Active",
+      "tier": "Partnership",
+      "phone": "904-555-0187",
+      "email": "margaret@example.com",
+      "address": "Mandarin, Jacksonville, FL",
+      "devices": "Desktop (Windows 7)",
+      "tech_comfort": "Zero",
+      "payment_terms": "Partnership, $200/month via Venmo",
+      "monthly_amount": 200.0,
+      "referred_by": null,
+      "last_visit_date": "2026-01-20",
+      "notes": "Prefers phone calls over email. Keep every instruction to one page, large print. Windows 7 - do not upgrade."
+    },
+    {
+      "id": 3,
+      "client_number": "C-003",
+      "full_name": "Robert & Diane",
+      "age": 70,
+      "descriptor": "Couple, both in their 70s",
+      "source": "Nextdoor",
+      "status": "Lead",
+      "tier": null,
+      "phone": "904-555-0122",
+      "email": "robert.diane@example.com",
+      "address": "San Marco, Jacksonville, FL",
+      "devices": "Laptop (Windows 11), two iPhones",
+      "tech_comfort": "Low",
+      "payment_terms": null,
+      "monthly_amount": null,
+      "referred_by": "Margaret (C-002)",
+      "last_visit_date": "2026-01-25",
+      "notes": "Interested in organizing photos and email. Free consult done; full session not booked yet."
+    }
+  ],
+  "visits": [
+    {
+      "id": 1,
+      "client_id": 1,
+      "visit_date": "2025-10-14",
+      "title": "First Visit",
+      "duration_hours": 3.0,
+      "tier": "Session",
+      "amount_due": 150.0,
+      "amount_paid": 150.0,
+      "payment_method": "Cash",
+      "summary": "John helped set up a book inventory system in Google Sheets. Every book gets a row, and Bruce can find any of them now.",
+      "notes": "Built a book inventory system in Google Sheets with Arena AI: every book gets a row (title, author, year, condition, shelf). Scanned 40 books together; left a printed cheat sheet.",
+      "invoice_number": "INV-2025-001"
+    },
+    {
+      "id": 2,
+      "client_id": 1,
+      "visit_date": "2025-11-18",
+      "title": "Email & Desktop Cleanup",
+      "duration_hours": 2.0,
+      "tier": "Session",
+      "amount_due": 200.0,
+      "amount_paid": 200.0,
+      "payment_method": "CashApp",
+      "summary": "Cleared out four years of junk email and organized the desktop so files are easy to find.",
+      "notes": "Email filters, scam-spotting routine, desktop folder structure.",
+      "invoice_number": "INV-2025-002"
+    },
+    {
+      "id": 3,
+      "client_id": 1,
+      "visit_date": "2025-12-16",
+      "title": "Printer Fix",
+      "duration_hours": 1.0,
+      "tier": "Follow-up",
+      "amount_due": 0.0,
+      "amount_paid": 0.0,
+      "payment_method": null,
+      "summary": "Quick visit to fix the printer and show Bruce the new photo folder.",
+      "notes": "Printer driver reinstalled; photo folder walkthrough.",
+      "invoice_number": null
+    },
+    {
+      "id": 4,
+      "client_id": 2,
+      "visit_date": "2026-01-20",
+      "title": "Video Calling Setup",
+      "duration_hours": 2.0,
+      "tier": "Partnership",
+      "amount_due": 200.0,
+      "amount_paid": 200.0,
+      "payment_method": "Venmo",
+      "summary": "Helped Margaret set up video calling with her granddaughter. Left a one-page cheat sheet taped to her monitor.",
+      "notes": "Video calling with granddaughter; cheat sheet taped to monitor.",
+      "invoice_number": "INV-2026-001"
+    },
+    {
+      "id": 5,
+      "client_id": 3,
+      "visit_date": "2026-01-25",
+      "title": "Free Intro Consult",
+      "duration_hours": 0.5,
+      "tier": "Consult (free)",
+      "amount_due": 0.0,
+      "amount_paid": 0.0,
+      "payment_method": null,
+      "summary": "Free 30-minute intro consult: showed them how to back up photos to Google Photos.",
+      "notes": "Photo backup walkthrough at the intro consult. Full session pending.",
+      "invoice_number": null
+    }
+  ],
+  "invoices": [
+    {
+      "id": 1,
+      "invoice_number": "INV-2025-001",
+      "client_id": 1,
+      "issue_date": "2025-10-14",
+      "due_date": "2025-10-14",
+      "amount": 150.0,
+      "currency": "USD",
+      "status": "Paid",
+      "payment_method": "Cash",
+      "paid_date": "2025-10-14",
+      "notes": "Session visit - book inventory system (3 hours). Paid in cash on site."
+    },
+    {
+      "id": 2,
+      "invoice_number": "INV-2025-002",
+      "client_id": 1,
+      "issue_date": "2025-11-18",
+      "due_date": "2025-11-18",
+      "amount": 200.0,
+      "currency": "USD",
+      "status": "Paid",
+      "payment_method": "CashApp",
+      "paid_date": "2025-11-18",
+      "notes": "Session visit - email & desktop cleanup (2 hours)."
+    },
+    {
+      "id": 3,
+      "invoice_number": "INV-2026-001",
+      "client_id": 2,
+      "issue_date": "2026-01-01",
+      "due_date": "2026-01-15",
+      "amount": 200.0,
+      "currency": "USD",
+      "status": "Sent",
+      "payment_method": null,
+      "paid_date": null,
+      "notes": "Partnership - January 2026. Follow up by phone if unpaid by the due date."
+    }
+  ],
+  "referrals": [
+    {
+      "id": 1,
+      "referrer_client_id": 2,
+      "referred_name": "Robert & Diane",
+      "referred_contact": "robert.diane@example.com / 904-555-0122",
+      "source": "Nextdoor",
+      "status": "Lead",
+      "date_referred": "2026-01-11",
+      "notes": "Margaret met them at church and passed along our card; they also found us on Nextdoor after that."
+    }
+  ],
+  "templates": [
+    {
+      "id": 1,
+      "name": "First-Visit Intake Script",
+      "category": "Intake",
+      "content": "1) Greet and confirm today's goals. 2) Ask which devices they own and use most. 3) Agree on a flat price before starting. 4) Record consent in the Consent & Access Log. 5) Leave a one-page cheat sheet, taped to the monitor if they like.",
+      "status": "Awaiting Operator Access"
+    }
+  ],
+  "tools": [
+    {
+      "id": 1,
+      "client_id": 1,
+      "icon": "📘",
+      "name": "Book Inventory System",
+      "description": "The sheet John built for me to list books.",
+      "status": "Awaiting Operator Access",
+      "status_note": "John is getting this ready for you."
+    },
+    {
+      "id": 2,
+      "client_id": 2,
+      "icon": "📹",
+      "name": "Video Calling Cheat Sheet",
+      "description": "One-page steps for video calling, taped to the monitor.",
+      "status": "Ready",
+      "status_note": ""
+    }
+  ],
+  "family": [
+    { "id": 1, "client_id": 1, "name": "Sarah", "relationship": "Daughter", "phone": "904-555-0101", "role": "Full View" },
+    { "id": 2, "client_id": 1, "name": "Michael", "relationship": "Son", "phone": "904-555-0102", "role": "Limited View" },
+    { "id": 3, "client_id": 1, "name": "Deacon James", "relationship": "Church", "phone": "904-555-0103", "role": "Decision Partner" }
+  ],
+  "jewels": [
+    {
+      "id": 1,
+      "client_id": 2,
+      "quote": "My husband always said the machine should work for you, not the other way around. I think he'd like you.",
+      "context": "Said while we set up video calling with her granddaughter.",
+      "date_captured": "2026-01-20"
+    },
+    {
+      "id": 2,
+      "client_id": 1,
+      "quote": "Every book in this house has a story - now every story has a row in a spreadsheet, and I can actually find them.",
+      "context": "Bruce, at the end of the first inventory session.",
+      "date_captured": "2025-10-14"
+    }
+  ],
+  "consent_log": [
+    { "id": 1, "client_id": 1, "consent_type": "Verbal", "scope": "Remote access to his desktop during the scheduled visit", "granted": true, "granted_date": "2025-10-14", "revoked_date": null, "notes": "Confirmed by phone before the visit; access ended when the visit ended." },
+    { "id": 2, "client_id": 1, "consent_type": "Written", "scope": "Store visit notes and invoice records in MiForge systems", "granted": true, "granted_date": "2025-10-14", "revoked_date": null, "notes": "Paper consent form signed at the visit; copy in Nextcloud clients/Bruce/consent/." },
+    { "id": 3, "client_id": 2, "consent_type": "Written", "scope": "Remote access to her desktop (Windows 7) for monthly check-ins", "granted": true, "granted_date": "2026-01-20", "revoked_date": null, "notes": "Signed consent form on file in Nextcloud clients/Margaret/consent/." },
+    { "id": 4, "client_id": 2, "consent_type": "Written", "scope": "One photo of the cheat-sheet setup for our records", "granted": true, "granted_date": "2026-01-20", "revoked_date": null, "notes": "Monitor + cheat sheet only, no faces." },
+    { "id": 5, "client_id": 2, "consent_type": "Implied", "scope": "Phone follow-ups about unpaid invoices", "granted": true, "granted_date": "2026-01-18", "revoked_date": null, "notes": "Prefers phone over email." },
+    { "id": 6, "client_id": 3, "consent_type": "Verbal", "scope": "Contact by phone/email about a future booking", "granted": true, "granted_date": "2026-01-25", "revoked_date": null, "notes": "No remote access granted yet - no session booked." }
+  ],
+  "messages": [
+    { "id": 1, "client_id": 1, "from": "John", "to": "Bruce", "date": "2025-10-15", "text": "Hi Bruce, it's John. The book inventory sheet is ready whenever you want to add more books." },
+    { "id": 2, "client_id": 1, "from": "Bruce", "to": "John", "date": "2025-10-16", "text": "Thanks John! I added 40 books last night. It works great." },
+    { "id": 3, "client_id": 1, "from": "John", "to": "Bruce", "date": "2025-10-16", "text": "That's wonderful to hear. Next visit I'll show you how to sort by author. Talk soon!" }
+  ]
+}

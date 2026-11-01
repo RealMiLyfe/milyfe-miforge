@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-cream font-body text-charcoal;
+    font-size: 22px;      /* portal body: 22px minimum */
+    line-height: 1.7;
+  }
+  h1, h2, h3, h4 {
+    @apply font-head text-navy;
+  }
+  /* WCAG 2.1 AA focus ring: 3px rust, 2px offset */
+  :focus-visible {
+    outline: 3px solid #C65D3B;
+    outline-offset: 2px;
+  }
+  /* no italics for emphasis - font-weight only */
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex min-h-touch items-center justify-center rounded-btn px-6 py-3 font-semibold no-underline;
+  }
+  /* portal buttons are 28px */
+  .btn-rust { @apply btn bg-rust text-[28px] text-cream; }   /* the ONE primary CTA per screen */
+  .btn-navy { @apply btn bg-navy text-[28px] text-cream; }
+  .btn-green { @apply btn bg-success text-[28px] text-cream; }
+  .tile {
+    @apply flex min-h-[200px] min-w-[200px] flex-col items-center justify-center gap-3 rounded-card p-4 text-center shadow-elev1;
+  }
+  .tile-label { @apply text-[24px] font-bold leading-tight; }
+  .card { @apply rounded-card border border-navy/30 bg-cream p-6 shadow-elev1; }
+  .field { @apply min-h-touch w-full rounded-btn border-2 border-navy/40 bg-cream px-4 py-3 text-charcoal; font-size: 22px; }
+  .measure { @apply max-w-measure; }
+}

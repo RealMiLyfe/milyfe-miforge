@@ -1,0 +1,11 @@
+{
+  "name": "MiForge — Client Portal",
+  "short_name": "MiForge",
+  "description": "Your MiForge home screen: call, message, tools, visits, screen sharing, family access.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F5F0E8",
+  "theme_color": "#1B3A5C",
+  "icons": []
+}

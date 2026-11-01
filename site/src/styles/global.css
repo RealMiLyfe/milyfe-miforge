@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-cream font-body text-charcoal;
+    font-size: 20px;      /* marketing body: 20px minimum */
+    line-height: 1.7;
+  }
+  h1, h2, h3, h4 {
+    @apply font-head text-navy;
+  }
+  /* WCAG 2.1 AA focus ring: 3px rust, 2px offset */
+  :focus-visible {
+    outline: 3px solid #C65D3B;
+    outline-offset: 2px;
+  }
+  /* no italics for emphasis - font-weight only (enforced by not using <em>/<i>) */
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex min-h-touch items-center justify-center rounded-btn px-6 py-3 font-semibold no-underline;
+  }
+  .btn-rust {
+    @apply btn bg-rust text-cream; /* the ONE primary CTA per screen */
+  }
+  .btn-navy-outline {
+    @apply btn border-2 border-navy bg-transparent text-navy;
+  }
+  .card {
+    @apply rounded-card border border-navy/30 bg-cream shadow-elev1;
+  }
+  .card-hidden-flag {
+    /* grey placeholder for feature-flagged-OFF content */
+    @apply rounded-card border-2 border-dashed border-charcoal/40 bg-charcoal/5 p-6 text-charcoal/60;
+  }
+  .measure {
+    @apply max-w-measure;
+  }
+  .field {
+    @apply min-h-touch w-full rounded-btn border-2 border-navy/40 bg-cream px-4 py-3 text-charcoal;
+  }
+}
